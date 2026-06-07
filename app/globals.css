@@ -1,0 +1,169 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-serif);
+  --font-sans: var(--font-noto-thai), 'Geist Fallback';
+  --font-serif: var(--font-noto-serif-thai), Georgia, serif;
+  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
+
+  /* Brand colors */
+  --color-burgundy: var(--burgundy);
+  --color-burgundy-dark: var(--burgundy-dark);
+  --color-burgundy-foreground: var(--burgundy-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ivory: var(--ivory);
+  --color-charcoal: var(--charcoal);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Brand palette */
+  --burgundy: oklch(0.33 0.105 22);
+  --burgundy-dark: oklch(0.26 0.09 22);
+  --burgundy-foreground: oklch(0.97 0.012 85);
+  --gold: oklch(0.74 0.115 78);
+  --gold-soft: oklch(0.82 0.085 82);
+  --ivory: oklch(0.972 0.012 84);
+  --charcoal: oklch(0.27 0.015 40);
+
+  --radius: 0.5rem;
+
+  /* Semantic tokens mapped to brand */
+  --background: oklch(0.972 0.012 84);
+  --foreground: oklch(0.27 0.015 40);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.27 0.015 40);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.27 0.015 40);
+  --primary: oklch(0.33 0.105 22);
+  --primary-foreground: oklch(0.972 0.012 84);
+  --secondary: oklch(0.94 0.015 84);
+  --secondary-foreground: oklch(0.33 0.105 22);
+  --muted: oklch(0.94 0.015 84);
+  --muted-foreground: oklch(0.48 0.02 40);
+  --accent: oklch(0.74 0.115 78);
+  --accent-foreground: oklch(0.26 0.09 22);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.88 0.012 80);
+  --input: oklch(0.88 0.012 80);
+  --ring: oklch(0.74 0.115 78);
+  --chart-1: oklch(0.33 0.105 22);
+  --chart-2: oklch(0.74 0.115 78);
+  --chart-3: oklch(0.5 0.06 40);
+  --chart-4: oklch(0.6 0.09 60);
+  --chart-5: oklch(0.43 0.08 30);
+  --sidebar: oklch(0.972 0.012 84);
+  --sidebar-foreground: oklch(0.27 0.015 40);
+  --sidebar-primary: oklch(0.33 0.105 22);
+  --sidebar-primary-foreground: oklch(0.972 0.012 84);
+  --sidebar-accent: oklch(0.94 0.015 84);
+  --sidebar-accent-foreground: oklch(0.33 0.105 22);
+  --sidebar-border: oklch(0.88 0.012 80);
+  --sidebar-ring: oklch(0.74 0.115 78);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Auth Components - Red / Gold theme for register/login */
+@layer components {
+  .auth-card {
+    width: 520px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(24px);
+    border: 2px solid rgba(255,255,255,0.8);
+    border-radius: 28px;
+    padding: 48px;
+    box-shadow: 0 0 40px rgba(212,175,55,0.15);
+  }
+
+  @media (max-width: 640px) {
+    .auth-card {
+      width: 92%;
+      padding: 24px;
+      border-radius: 20px;
+    }
+  }
+
+  .auth-input {
+    height: 56px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 16px;
+    color: var(--gold);
+    padding: 0 18px;
+    @apply w-full transition-all duration-200;
+  }
+
+  .auth-input:focus {
+    border: 1px solid #E6C96B;
+    box-shadow: 0 0 0 4px rgba(212,175,55,0.18);
+    outline: none;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .auth-button {
+    height: 60px;
+    background: linear-gradient(180deg,#E0BF54,#C69B26);
+    color: #6E0000;
+    font-weight: 700;
+    border-radius: 18px;
+    @apply w-full;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .auth-button:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212,175,55,0.35); }
+
+  .strength-indicator { @apply h-2 w-4 rounded-full transition-colors; }
+}
