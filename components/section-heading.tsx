@@ -7,6 +7,7 @@ export function SectionHeading({
   align = 'left',
   light = false,
   className,
+  hideDivider = false,
 }: {
   eyebrow?: string
   title: string
@@ -14,11 +15,12 @@ export function SectionHeading({
   align?: 'left' | 'center'
   light?: boolean
   className?: string
+  hideDivider?: boolean
 }) {
   return (
     <div
       className={cn(
-        'max-w-2xl',
+        'max-w-3xl',
         align === 'center' && 'mx-auto text-center',
         className,
       )}
@@ -26,8 +28,8 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={cn(
-            'text-sm font-semibold uppercase tracking-wider',
-            light ? 'text-gold' : 'text-primary',
+            'text-[13px] font-bold tracking-[0.2em] uppercase opacity-80',
+            light ? 'text-gold' : 'text-primary/70',
           )}
         >
           {eyebrow}
@@ -35,24 +37,26 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          'mt-2 text-balance font-serif text-2xl font-bold md:text-3xl',
-          light ? 'text-gold' : 'text-primary',
+          'mt-3 text-balance font-serif text-3xl font-bold leading-tight md:text-4xl',
+          light ? 'text-white' : 'text-primary',
         )}
       >
         {title}
       </h2>
-      <span
-        className={cn(
-          'mt-3 block h-0.5 w-16 rounded bg-gold',
-          align === 'center' && 'mx-auto',
-        )}
-        aria-hidden="true"
-      />
+      {!hideDivider && (
+        <span
+          className={cn(
+            'mt-4 block h-0.5 w-12 rounded-full bg-gold/60',
+            align === 'center' && 'mx-auto',
+          )}
+          aria-hidden="true"
+        />
+      )}
       {description && (
         <p
           className={cn(
-            'mt-4 text-pretty leading-relaxed',
-            light ? 'text-primary-foreground/85' : 'text-muted-foreground',
+            'mt-5 text-pretty text-base leading-8',
+            light ? 'text-white/80' : 'text-muted-foreground',
           )}
         >
           {description}

@@ -34,7 +34,7 @@ export function OfficeStats() {
       {stats.map((stat) => (
         <article key={stat.label} className="rounded-xl border border-border bg-card p-4 shadow-sm">
           <div className="flex items-start gap-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-gold">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gold-soft/70 text-gold-ink">
               <stat.icon className="size-4" aria-hidden="true" />
             </span>
             <div>

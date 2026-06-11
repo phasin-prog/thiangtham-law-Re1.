@@ -7,7 +7,6 @@ import {
   ClipboardCheck,
   FileSearch,
   Gavel,
-  Images,
   Scale,
   Send,
   UsersRound,
@@ -60,42 +59,26 @@ const processSteps = [
   { icon: Gavel, title: 'ดำเนินการตามขั้นตอนกฎหมาย', description: 'เจรจา จัดทำเอกสาร ยื่นคำร้อง ฟ้องคดี หรือว่าความตามขอบเขตงาน' },
 ] as const
 
-const caseStudyCards = [
-  {
-    icon: Building2,
-    title: 'กิจกรรมสำนักงาน',
-    description: 'บรรยากาศการทำงาน การประชุม และการเตรียมข้อมูลคดี',
-  },
-  {
-    icon: Gavel,
-    title: 'งานด้านคดีและศาล',
-    description: 'นำเสนอภาพรวมกระบวนการทำงานโดยไม่เปิดเผยข้อมูลลูกความ',
-  },
-  {
-    icon: Images,
-    title: 'เผยแพร่ความรู้กฎหมาย',
-    description: 'กิจกรรมให้ความรู้และสื่อกฎหมายสำหรับประชาชน',
-  },
-] as const
-
 export default function HomePage() {
   return (
     <main>
       <HeroSection />
 
-      <section className="relative z-10 -mt-5 pb-12 md:-mt-8">
+      <section className="pb-20 md:pb-28">
         <Container>
-          <div className="grid overflow-hidden rounded-2xl border border-gold/25 bg-card shadow-xl sm:grid-cols-2 lg:grid-cols-4">
+          <div className="home-trust-grid grid overflow-hidden rounded-2xl border border-gold/25 bg-card shadow-xl sm:grid-cols-2 lg:grid-cols-4">
             {trustCards.map((card) => (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group border-b border-border p-5 transition hover:bg-secondary/70 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
+                className="home-trust-card group border-b border-border p-5 transition sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
               >
-                <card.icon className="size-6 text-gold" aria-hidden="true" />
+                <span className="home-trust-icon transition-colors">
+                  <card.icon className="size-5" aria-hidden="true" />
+                </span>
                 <h2 className="mt-3 font-serif text-lg font-bold text-primary">{card.title}</h2>
                 <p className="mt-1 text-xs leading-5 text-muted-foreground">{card.description}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-primary">
+                <span className="home-trust-link mt-3 inline-flex items-center gap-1 text-xs font-bold">
                   ดูข้อมูล
                   <ArrowRight className="size-3.5 transition group-hover:translate-x-1" aria-hidden="true" />
                 </span>
@@ -111,7 +94,6 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             align="center"
-            eyebrow="บริการกฎหมาย"
             title="บริการหลักของสำนักงาน"
             description="ให้คำปรึกษา รับว่าความ จัดทำเอกสาร และดำเนินคดี โดยพิจารณาจากข้อเท็จจริงและพยานหลักฐานของแต่ละกรณี"
           />
@@ -140,17 +122,13 @@ export default function HomePage() {
         <Container>
           <SectionHeading
             align="center"
-            eyebrow="ขั้นตอนการใช้บริการ"
-            title="เริ่มต้นปรึกษาได้โดยไม่ต้องรู้ศัพท์กฎหมาย"
+            title="ขั้นตอนการใช้บริการ"
             description="เพียงเล่าข้อเท็จจริงตามลำดับและส่งเอกสารที่มี ทีมงานจะช่วยจัดประเด็นและอธิบายขั้นตอนถัดไป"
           />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-            {processSteps.map((step, index) => (
-              <article key={step.title} className="relative rounded-2xl border border-border bg-card p-6 shadow-sm">
-                <span className="absolute right-5 top-4 font-serif text-4xl font-bold text-gold/25">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <span className="flex size-11 items-center justify-center rounded-xl bg-primary text-gold">
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+            {processSteps.map((step) => (
+              <article key={step.title} className="home-process-card relative rounded-xl border bg-card p-6 shadow-sm transition-colors">
+                <span className="home-process-icon flex size-11 items-center justify-center rounded-lg">
                   <step.icon className="size-5" aria-hidden="true" />
                 </span>
                 <h3 className="mt-5 font-serif text-lg font-bold text-primary">{step.title}</h3>
@@ -174,7 +152,6 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-5">
             <SectionHeading
               light
-              eyebrow="กฎหมายน่ารู้"
               title="ความรู้เบื้องต้นก่อนตัดสินใจ"
               description="อ่านแนวทางเตรียมตัว เอกสาร และขั้นตอนสำคัญ โดยเนื้อหาเป็นข้อมูลทั่วไปและไม่แทนคำปรึกษาเฉพาะกรณี"
             />
@@ -186,34 +163,6 @@ export default function HomePage() {
             {legalArticles.slice(0, 3).map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-16 md:py-22">
-        <Container>
-          <SectionHeading
-            align="center"
-            eyebrow="กิจกรรมและแนวทางการทำงาน"
-            title="ภาพรวมสำนักงานและตัวอย่างผลงาน"
-            description="นำเสนอการทำงานและกิจกรรมโดยรักษาความลับ ไม่เปิดเผยข้อมูลที่ระบุตัวลูกความ และไม่รับรองผลคดีจากตัวอย่าง"
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {caseStudyCards.map((card) => (
-              <article key={card.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
-                <card.icon className="size-7 text-gold" aria-hidden="true" />
-                <h3 className="mt-4 font-serif text-xl font-bold text-primary">{card.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">{card.description}</p>
-              </article>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-gold"
-            >
-              ดูตัวอย่างแนวทางการทำงาน <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
           </div>
         </Container>
       </section>

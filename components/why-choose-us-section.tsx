@@ -56,10 +56,11 @@ export function WhyChooseUsSection() {
   const { t } = useTranslation()
 
   return (
-    <section className="py-16 md:py-22">
+    <section className="bg-primary py-24 text-primary-foreground md:py-32">
       <Container>
         <SectionHeading
           align="center"
+          light
           eyebrow={t('ทำไมต้องเลือกเรา', 'Why Choose Us')}
           title={t(
             'เหตุผลที่ลูกความเลือกเราให้เป็นทนายว่าความให้ในศาล',
@@ -74,13 +75,13 @@ export function WhyChooseUsSection() {
         <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map((reason) => (
             <article key={reason.title.en} className="group flex flex-col items-center text-center">
-              <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-secondary text-gold ring-1 ring-gold/20 transition-all duration-300 group-hover:bg-primary group-hover:text-gold group-hover:ring-primary">
+              <div className="mb-5 flex size-14 items-center justify-center rounded-2xl bg-white/8 text-gold ring-1 ring-gold/30 transition-all duration-300 group-hover:bg-gold group-hover:text-primary-dark group-hover:ring-gold">
                 <reason.icon className="size-7" aria-hidden="true" />
               </div>
-              <h3 className="font-serif text-xl font-bold text-primary">
+              <h3 className="font-serif text-xl font-bold text-white">
                 {t(reason.title.th, reason.title.en)}
               </h3>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              <p className="mt-3 text-sm leading-7 text-primary-foreground/75">
                 {t(reason.description.th, reason.description.en)}
               </p>
             </article>

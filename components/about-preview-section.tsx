@@ -13,30 +13,29 @@ export function AboutPreviewSection() {
   const { locale, t } = useTranslation()
 
   return (
-    <section className="bg-secondary/60 py-16 md:py-22">
+    <section className="bg-blue-soft py-24 md:py-32">
       <Container className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="relative min-h-[390px] overflow-hidden rounded-3xl border border-gold/25 bg-primary shadow-xl">
+        <div className="motion-hero-panel animate-fade-up relative min-h-[420px] overflow-hidden rounded-2xl border border-gold/15 bg-primary shadow-lg">
           <Image
             src="/law-office-hero.png"
             alt={t('บรรยากาศสำนักงานกฎหมาย', 'Law Office Atmosphere')}
             fill
-            className="object-cover opacity-65"
+            className="object-cover opacity-60"
             sizes="(max-width: 1024px) 100vw, 45vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark via-primary/20 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
-            <p className="text-sm font-semibold text-gold">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary-dark/80 via-primary/20 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-8 text-white">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold/90">
               {t('ก่อตั้งเมื่อปี พ.ศ. 2550', 'Established in 2007')}
             </p>
-            <p className="mt-2 font-serif text-2xl font-bold">
+            <p className="mt-3 font-serif text-3xl font-bold">
               {t(officeInfo.name, officeInfo.englishName)}
             </p>
           </div>
         </div>
 
-        <div>
+        <div className="animate-fade-up stagger-1">
           <SectionHeading
-            eyebrow={t('เกี่ยวกับสำนักงาน', 'About Our Office')}
             title={t(
               'ดูแลปัญหากฎหมายด้วยข้อเท็จจริง พยานหลักฐาน และแนวทางที่ชัดเจน',
               'Handling legal issues with facts, evidence, and clear pathways',

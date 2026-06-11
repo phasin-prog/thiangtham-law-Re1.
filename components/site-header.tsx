@@ -70,26 +70,43 @@ function TopInfoBar() {
             <span>Line</span>
           </a>
 
-          <div className="flex items-center border-l border-white/20 pl-4 ml-2 gap-2">
-            <button
-              onClick={() => switchLocale('th')}
-              className={cn(
-                'px-1.5 py-0.5 rounded transition hover:text-gold',
-                locale === 'th' ? 'bg-gold text-burgundy-dark font-bold' : 'opacity-70',
-              )}
-            >
-              TH
-            </button>
-            <span className="opacity-20 text-[10px]">|</span>
-            <button
-              onClick={() => switchLocale('en')}
-              className={cn(
-                'px-1.5 py-0.5 rounded transition hover:text-gold',
-                locale === 'en' ? 'bg-gold text-burgundy-dark font-bold' : 'opacity-70',
-              )}
-            >
-              EN
-            </button>
+          <div className="ml-4 flex items-center border-l border-white/20 pl-4">
+            <div className="relative flex h-7 w-[76px] items-center rounded-full bg-black/25 p-0.5 ring-1 ring-white/10">
+              {/* Sliding Background Indicator */}
+              <div
+                className={cn(
+                  'absolute h-6 w-[35px] rounded-full bg-gold shadow-sm transition-transform duration-300 ease-out-quart',
+                  locale === 'en' ? 'translate-x-[34px]' : 'translate-x-0',
+                )}
+                aria-hidden="true"
+              />
+
+              <button
+                type="button"
+                onClick={() => switchLocale('th')}
+                aria-label={t('เปลี่ยนภาษาเป็นไทย', 'Switch language to Thai')}
+                aria-pressed={locale === 'th'}
+                className={cn(
+                  'relative z-10 flex h-6 w-[35px] items-center justify-center text-[10px] font-bold transition-colors duration-300 focus-visible:outline-none',
+                  locale === 'th' ? 'text-burgundy-dark' : 'text-white/60 hover:text-white',
+                )}
+              >
+                TH
+              </button>
+
+              <button
+                type="button"
+                onClick={() => switchLocale('en')}
+                aria-label={t('เปลี่ยนภาษาเป็นอังกฤษ', 'Switch language to English')}
+                aria-pressed={locale === 'en'}
+                className={cn(
+                  'relative z-10 flex h-6 w-[35px] items-center justify-center text-[10px] font-bold transition-colors duration-300 focus-visible:outline-none',
+                  locale === 'en' ? 'text-burgundy-dark' : 'text-white/60 hover:text-white',
+                )}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       </Container>
@@ -179,6 +196,7 @@ export function SiteHeader() {
   const [openMenu, setOpenMenu] = useState<DropdownKey | null>(null)
   const servicesTriggerRef = useRef<HTMLButtonElement>(null)
   const knowledgeTriggerRef = useRef<HTMLButtonElement>(null)
+  const closeMenuTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (!openMenu) return
@@ -196,9 +214,41 @@ export function SiteHeader() {
     return () => document.removeEventListener('keydown', handleEscape)
   }, [openMenu])
 
-  function closeNavigation() {
-    setMobileOpen(false)
+  useEffect(() => {
+    return () => {
+      if (closeMenuTimerRef.current) {
+        clearTimeout(closeMenuTimerRef.current)
+      }
+    }
+  }, [])
+
+  function cancelDesktopMenuClose() {
+    if (!closeMenuTimerRef.current) return
+    clearTimeout(closeMenuTimerRef.current)
+    closeMenuTimerRef.current = null
+  }
+
+  function openDesktopMenu(menu: DropdownKey) {
+    cancelDesktopMenuClose()
+    setOpenMenu(menu)
+  }
+
+  function closeDesktopMenu() {
+    cancelDesktopMenuClose()
     setOpenMenu(null)
+  }
+
+  function scheduleDesktopMenuClose() {
+    cancelDesktopMenuClose()
+    closeMenuTimerRef.current = setTimeout(() => {
+      setOpenMenu(null)
+      closeMenuTimerRef.current = null
+    }, 160)
+  }
+
+  function closeNavigation() {
+    closeDesktopMenu()
+    setMobileOpen(false)
   }
 
   function handleDesktopKeyDown(event: React.KeyboardEvent<HTMLElement>) {
@@ -212,7 +262,7 @@ export function SiteHeader() {
 
   function handleDesktopBlur(event: React.FocusEvent<HTMLElement>) {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-      setOpenMenu(null)
+      closeDesktopMenu()
     }
   }
 
@@ -229,7 +279,8 @@ export function SiteHeader() {
           <nav
             className="relative flex min-h-13 items-center justify-center gap-0.5"
             aria-label={t('เมนูหลัก', 'Main Menu')}
-            onMouseLeave={() => setOpenMenu(null)}
+            onPointerEnter={cancelDesktopMenuClose}
+            onPointerLeave={scheduleDesktopMenuClose}
             onBlur={handleDesktopBlur}
             onKeyDown={handleDesktopKeyDown}
           >
@@ -253,19 +304,21 @@ export function SiteHeader() {
                 return (
                   <div
                     key={link.href}
-                    className="static"
-                    onMouseEnter={() => setOpenMenu(dropdownKey)}
+                    className="desktop-nav-dropdown static"
+                    onPointerEnter={() => openDesktopMenu(dropdownKey)}
                   >
                     <button
                       ref={dropdownKey === 'services' ? servicesTriggerRef : knowledgeTriggerRef}
                       type="button"
-                      onFocus={() => setOpenMenu(dropdownKey)}
-                      onClick={() =>
+                      onFocus={() => openDesktopMenu(dropdownKey)}
+                      onClick={() => {
+                        cancelDesktopMenuClose()
                         setOpenMenu((value) => (value === dropdownKey ? null : dropdownKey))
-                      }
+                      }}
+                      data-active={active || menuOpen ? 'true' : 'false'}
                       className={cn(
-                        'inline-flex items-center gap-1 rounded-md px-2.5 py-2 text-[13px] font-semibold transition hover:bg-white/8 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
-                        active || menuOpen ? 'bg-white/8 text-gold' : 'text-burgundy-foreground/90',
+                        'site-nav-item inline-flex items-center gap-1 rounded-md px-2.5 py-2 text-[13px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                        active || menuOpen ? 'text-gold' : 'text-burgundy-foreground/90',
                       )}
                       aria-haspopup="true"
                       aria-expanded={menuOpen}
@@ -285,14 +338,14 @@ export function SiteHeader() {
                         id={menuId}
                         groups={serviceMenuGroups}
                         open={menuOpen}
-                        onNavigate={() => setOpenMenu(null)}
+                        onNavigate={closeDesktopMenu}
                       />
                     ) : (
                       <LegalKnowledgeDropdown
                         id={menuId}
                         groups={legalKnowledgeMenuGroups}
                         open={menuOpen}
-                        onNavigate={() => setOpenMenu(null)}
+                        onNavigate={closeDesktopMenu}
                       />
                     )}
                   </div>
@@ -303,11 +356,13 @@ export function SiteHeader() {
                 <Link
                   key={link.href}
                   href={localizedHref}
-                  onMouseEnter={() => setOpenMenu(null)}
-                  onFocus={() => setOpenMenu(null)}
+                  onMouseEnter={closeDesktopMenu}
+                  onFocus={closeDesktopMenu}
+                  data-active={active ? 'true' : 'false'}
+                  aria-current={active ? 'page' : undefined}
                   className={cn(
-                    'rounded-md px-2.5 py-2 text-[13px] font-semibold transition hover:bg-white/8 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
-                    active ? 'bg-white/8 text-gold' : 'text-burgundy-foreground/90',
+                    'site-nav-item rounded-md px-2.5 py-2 text-[13px] font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                    active ? 'text-gold' : 'text-burgundy-foreground/90',
                   )}
                 >
                   {t(link.label, link.labelEn)}
@@ -316,6 +371,8 @@ export function SiteHeader() {
             })}
             <Link
               href={getLocalePath('/search', locale)}
+              onMouseEnter={closeDesktopMenu}
+              onFocus={closeDesktopMenu}
               aria-label={t('ค้นหา', 'Search')}
               className="ml-1 flex size-9 items-center justify-center rounded-md text-gold transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >

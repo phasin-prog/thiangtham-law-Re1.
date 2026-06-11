@@ -12,7 +12,7 @@ export function ArticleCard({
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:-translate-y-1 hover:border-gold/70 hover:shadow-lg">
       <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-        <span className="rounded-full bg-secondary px-3 py-1 text-primary">
+        <span className="rounded-full bg-gold-soft/55 px-3 py-1 text-gold-ink">
           {article.category}
         </span>
         <span>{article.date}</span>

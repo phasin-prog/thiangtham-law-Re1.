@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, BookOpenText, Scale } from 'lucide-react'
 import type {
@@ -8,7 +7,6 @@ import type {
   ServiceMenuGroup,
 } from '@/lib/data/navigation'
 import { useTranslation, getLocalePath } from '@/lib/i18n'
-import { cn } from '@/lib/utils'
 
 type SharedMenuProps = {
   id: string
@@ -28,17 +26,13 @@ export function ServicesMegaMenu({
     <div
       id={id}
       aria-hidden={!open}
-      className={cn(
-        'absolute inset-x-0 top-full z-50 pt-2 transition duration-200',
-        open
-          ? 'visible translate-y-0 opacity-100'
-          : 'pointer-events-none invisible -translate-y-1 opacity-0',
-      )}
+      data-state={open ? 'open' : 'closed'}
+      className="site-nav-panel absolute inset-x-0 top-full z-50 pt-2"
     >
       <div className="overflow-hidden rounded-2xl border border-gold/25 bg-card text-card-foreground shadow-2xl shadow-burgundy-dark/25">
         <div className="grid divide-y divide-border xl:grid-cols-4 xl:divide-x xl:divide-y-0">
           {groups.map((group) => (
-            <section key={group.title} className="p-5">
+            <section key={group.title} className="site-nav-panel-item p-5">
               <div className="flex items-start gap-3">
                 <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-burgundy text-gold">
                   <Scale className="size-4" aria-hidden="true" />
@@ -102,17 +96,13 @@ export function LegalKnowledgeDropdown({
     <div
       id={id}
       aria-hidden={!open}
-      className={cn(
-        'absolute right-0 top-full z-50 w-[min(620px,calc(100vw-2rem))] pt-2 transition duration-200',
-        open
-          ? 'visible translate-y-0 opacity-100'
-          : 'pointer-events-none invisible -translate-y-1 opacity-0',
-      )}
+      data-state={open ? 'open' : 'closed'}
+      className="site-nav-panel absolute right-0 top-full z-50 w-[min(620px,calc(100vw-2rem))] pt-2"
     >
       <div className="overflow-hidden rounded-2xl border border-gold/25 bg-card text-card-foreground shadow-2xl shadow-burgundy-dark/25">
         <div className="grid sm:grid-cols-2 sm:divide-x sm:divide-border">
           {groups.map((group) => (
-            <section key={group.title} className="p-5">
+            <section key={group.title} className="site-nav-panel-item p-5">
               <div className="flex items-center gap-2">
                 <BookOpenText className="size-5 text-gold" aria-hidden="true" />
                 <h2 className="font-serif text-lg font-bold text-burgundy">
@@ -150,4 +140,3 @@ export function LegalKnowledgeDropdown({
     </div>
   )
 }
-

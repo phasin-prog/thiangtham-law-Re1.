@@ -37,14 +37,14 @@ export function CTASection({
               href={`https://line.me/R/ti/p/~${officeContact.line}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-bold text-primary-dark transition hover:bg-gold-soft"
+              className="motion-action inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-bold text-primary-dark hover:bg-gold-soft"
             >
               <MessageCircle className="size-4" aria-hidden="true" />
               {t('ปรึกษาผ่าน Line', 'Consult via Line')}
             </a>
             <a
               href={`tel:${officeContact.phones[0].replace(/-/g, '')}`}
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white transition hover:border-gold hover:text-gold"
+              className="motion-action inline-flex items-center justify-center gap-2 rounded-lg border border-white/35 px-6 py-3 text-sm font-bold text-white hover:border-gold hover:text-gold"
             >
               <Phone className="size-4" aria-hidden="true" />
               {t('โทรหาเรา', 'Call Us')}

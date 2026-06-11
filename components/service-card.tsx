@@ -16,7 +16,7 @@ export function ServiceCard({
       href={`${locale === 'en' ? '/en' : ''}/services/${service.slug}`}
       className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-gold/70 hover:shadow-lg"
     >
-      <span className="flex size-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+      <span className="flex size-12 items-center justify-center rounded-lg bg-blue-soft text-blue transition-colors group-hover:bg-primary group-hover:text-gold">
         {Icon && <Icon className="size-6" aria-hidden="true" />}
       </span>
       <h3 className="mt-4 font-serif text-lg font-bold text-primary">

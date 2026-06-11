@@ -12,6 +12,8 @@ export function FreeConsultationSection() {
   const methods = [
     {
       icon: Phone,
+      iconClassName: 'bg-blue-soft text-blue',
+      actionClassName: 'text-blue hover:text-primary',
       title: t('โทรปรึกษาเบื้องต้น', 'Initial Call'),
       description: t('แจ้งข้อเท็จจริงเบื้องต้นทางโทรศัพท์ เพื่อประเมินแนวทางเบื้องต้น', 'Tell us your facts over the phone for an initial evaluation.'),
       action: {
@@ -21,6 +23,8 @@ export function FreeConsultationSection() {
     },
     {
       icon: MessageSquare,
+      iconClassName: 'bg-jade-soft text-jade',
+      actionClassName: 'text-jade hover:text-primary',
       title: t('แชทผ่าน Line', 'Chat via Line'),
       description: t('ส่งภาพถ่ายเอกสารหรือหมายศาลมาที่ Line เพื่อให้ทีมงานช่วยตรวจสอบ', 'Send photos of documents or summons via Line for a quick review.'),
       action: {
@@ -30,6 +34,8 @@ export function FreeConsultationSection() {
     },
     {
       icon: Send,
+      iconClassName: 'bg-gold-soft/65 text-gold-ink',
+      actionClassName: 'text-gold-ink hover:text-primary',
       title: t('ส่งแบบฟอร์ม', 'Submit Form'),
       description: t('ระบุข้อมูลการติดต่อและเรื่องที่ต้องการปรึกษาผ่านหน้าเว็บไซต์', 'Provide your contact info and legal issues through our website form.'),
       action: {
@@ -40,7 +46,7 @@ export function FreeConsultationSection() {
   ]
 
   return (
-    <section className="bg-secondary/40 py-16 md:py-22">
+    <section className="bg-navy-soft py-16 md:py-22">
       <Container>
         <SectionHeading
           align="center"
@@ -58,7 +64,7 @@ export function FreeConsultationSection() {
               key={method.title}
               className="flex flex-col items-center rounded-2xl border border-border bg-card p-8 text-center shadow-sm transition-shadow hover:shadow-md"
             >
-              <div className="mb-5 flex size-14 items-center justify-center rounded-full bg-primary/5 text-primary">
+              <div className={`mb-5 flex size-14 items-center justify-center rounded-full ${method.iconClassName}`}>
                 <method.icon className="size-7" aria-hidden="true" />
               </div>
               <h3 className="font-serif text-xl font-bold text-primary">{method.title}</h3>
@@ -67,7 +73,7 @@ export function FreeConsultationSection() {
               </p>
               <a
                 href={method.action.href}
-                className="mt-6 font-serif text-lg font-bold text-gold hover:text-primary transition-colors"
+                className={`mt-6 font-serif text-lg font-bold transition-colors ${method.actionClassName}`}
               >
                 {method.action.label}
               </a>

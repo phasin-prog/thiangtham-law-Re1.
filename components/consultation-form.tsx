@@ -1,134 +1,136 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle2, LockKeyhole } from 'lucide-react'
+import { CheckCircle2, Loader2, Send } from 'lucide-react'
 import { useTranslation } from '@/lib/i18n'
-
-const fieldClass =
-  'mt-2 w-full rounded-lg border border-border bg-white px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-gold focus:ring-4 focus:ring-gold/15'
+import { cn } from '@/lib/utils'
 
 export function ConsultationForm() {
-  const [submitted, setSubmitted] = useState(false)
   const { t } = useTranslation()
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
-  if (submitted) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus('submitting')
+    
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    setStatus('success')
+  }
+
+  if (status === 'success') {
     return (
-      <div className="rounded-2xl border border-gold/40 bg-card p-8 text-center shadow-sm">
-        <CheckCircle2 className="mx-auto size-12 text-primary" aria-hidden="true" />
-        <h2 className="mt-4 font-serif text-2xl font-bold text-primary">
-          {t('ส่งข้อมูลเรียบร้อยแล้ว', 'Your Information Has Been Submitted')}
-        </h2>
-        <p className="mx-auto mt-3 max-w-lg leading-7 text-muted-foreground">
+      <div className="flex flex-col items-center justify-center py-10 text-center animate-in fade-in zoom-in duration-500">
+        <div className="flex size-16 items-center justify-center rounded-full bg-gold/20 text-gold">
+          <CheckCircle2 className="size-8" />
+        </div>
+        <h3 className="mt-6 font-serif text-2xl font-bold text-white">
+          {t('ได้รับข้อมูลของท่านแล้ว', 'Request Received')}
+        </h3>
+        <p className="mt-2 text-primary-foreground/70">
           {t(
-            'ทีมงานจะตรวจสอบรายละเอียดและติดต่อกลับตามช่องทางที่คุณระบุ',
-            'Our team will review the details and contact you through your preferred channel.',
+            'เจ้าหน้าที่จะติดต่อกลับเพื่อสอบถามรายละเอียดเพิ่มเติมโดยเร็วที่สุด',
+            'Our team will contact you shortly to discuss your case details.',
           )}
         </p>
         <button
-          type="button"
-          onClick={() => setSubmitted(false)}
-          className="mt-6 rounded-lg border border-primary px-5 py-2.5 text-sm font-semibold text-primary"
+          onClick={() => setStatus('idle')}
+          className="mt-8 text-sm font-bold text-gold hover:underline"
         >
-          {t('ส่งข้อมูลเพิ่มเติม', 'Submit Another Enquiry')}
+          {t('ส่งคำขอใหม่', 'Send another request')}
         </button>
       </div>
     )
   }
 
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault()
-        setSubmitted(true)
-      }}
-      className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8"
-    >
+    <form onSubmit={handleSubmit} className="grid gap-5">
       <div className="grid gap-5 sm:grid-cols-2">
-        <label className="text-sm font-medium">
-          {t('ชื่อ-นามสกุล', 'Full Name')} <span className="text-destructive">*</span>
-          <input name="fullName" autoComplete="name" required className={fieldClass} />
-        </label>
-        <label className="text-sm font-medium">
-          {t('เบอร์โทรศัพท์', 'Phone Number')} <span className="text-destructive">*</span>
-          <input name="phone" type="tel" autoComplete="tel" required className={fieldClass} />
-        </label>
-        <label className="text-sm font-medium">
-          {t('อีเมล', 'Email')}
-          <input name="email" type="email" autoComplete="email" className={fieldClass} />
-        </label>
-        <label className="text-sm font-medium">
-          {t('ประเภทปัญหากฎหมาย', 'Type of Legal Matter')} <span className="text-destructive">*</span>
-          <select name="legalIssueType" required defaultValue="" className={fieldClass}>
-            <option value="" disabled>{t('เลือกประเภทเรื่อง', 'Select a Matter')}</option>
-            <option value="civil">{t('คดีแพ่ง', 'Civil Matter')}</option>
-            <option value="criminal">{t('คดีอาญา', 'Criminal Matter')}</option>
-            <option value="family-inheritance">{t('ครอบครัว / มรดก', 'Family / Inheritance')}</option>
-            <option value="labor">{t('แรงงาน', 'Labor')}</option>
-            <option value="business-contracts">{t('ธุรกิจ / สัญญา', 'Business / Contracts')}</option>
-            <option value="property">{t('อสังหาริมทรัพย์', 'Property')}</option>
-            <option value="other">{t('อื่น ๆ', 'Other')}</option>
-          </select>
-        </label>
-        <label className="text-sm font-medium sm:col-span-2">
-          {t('รายละเอียดเบื้องต้น', 'Initial Details')} <span className="text-destructive">*</span>
-          <textarea
-            name="message"
-            rows={6}
+        <div className="space-y-2">
+          <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-gold/80">
+            {t('ชื่อ-นามสกุล', 'Full Name')}
+          </label>
+          <input
             required
-            className={fieldClass}
-            placeholder={t(
-              'โปรดเล่าลำดับเหตุการณ์ เอกสารที่มี และสิ่งที่ต้องการความช่วยเหลือ',
-              'Describe the timeline, available documents, and the help you need.',
-            )}
+            id="name"
+            name="name"
+            type="text"
+            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/20 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+            placeholder={t('สมชาย ใจดี', 'e.g. John Doe')}
           />
-        </label>
-        <label className="text-sm font-medium">
-          {t('มีเอกสารที่เกี่ยวข้องหรือไม่', 'Do You Have Related Documents?')}
-          <select name="hasDocuments" defaultValue="yes" className={fieldClass}>
-            <option value="yes">{t('มีเอกสาร', 'Yes')}</option>
-            <option value="no">{t('ยังไม่มีเอกสาร', 'Not Yet')}</option>
-            <option value="unsure">{t('ไม่แน่ใจ', 'Not Sure')}</option>
-          </select>
-        </label>
-        <label className="text-sm font-medium">
-          {t('ช่องทางที่สะดวก', 'Preferred Contact Method')}
-          <select name="preferredContactMethod" defaultValue="phone" className={fieldClass}>
-            <option value="phone">{t('โทรศัพท์', 'Phone')}</option>
-            <option value="line">Line</option>
-            <option value="email">Email</option>
-          </select>
-        </label>
-        <label className="text-sm font-medium sm:col-span-2">
-          {t('วันที่สะดวกให้ติดต่อ', 'Preferred Contact Date')}
-          <input name="preferredDate" type="date" className={fieldClass} />
-        </label>
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-gold/80">
+            {t('เบอร์โทรศัพท์', 'Phone Number')}
+          </label>
+          <input
+            required
+            id="phone"
+            name="phone"
+            type="tel"
+            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/20 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
+            placeholder="081-234-5678"
+          />
+        </div>
       </div>
 
-      <label className="mt-6 flex items-start gap-3 text-sm leading-6 text-muted-foreground">
-        <input name="consent" type="checkbox" required className="mt-1 size-4 accent-primary" />
-        <span>
-          {t(
-            'ข้าพเจ้ายินยอมให้สำนักงานใช้ข้อมูลนี้เพื่อประเมินเบื้องต้นและติดต่อกลับ และเข้าใจว่าการส่งแบบฟอร์มยังไม่ถือเป็นการรับว่าความ',
-            'I consent to the office using this information for an initial assessment and follow-up. I understand that submitting this form does not establish a lawyer-client engagement.',
-          )}
-        </span>
-      </label>
-
-      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
-        <button
-          type="submit"
-          className="rounded-lg bg-primary px-6 py-3.5 text-sm font-bold text-white transition hover:bg-primary-dark"
+      <div className="space-y-2">
+        <label htmlFor="service" className="text-xs font-bold uppercase tracking-wider text-gold/80">
+          {t('ประเภทคดี/บริการ', 'Legal Service Type')}
+        </label>
+        <select
+          id="service"
+          name="service"
+          className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold appearance-none"
         >
-          {t('ส่งข้อมูลเพื่อขอรับการติดต่อ', 'Request a Follow-up')}
-        </button>
-        <p className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-          <LockKeyhole className="size-4 text-primary" aria-hidden="true" />
-          {t(
-            'กรุณาอย่าส่งรหัสผ่านหรือข้อมูลทางการเงินที่ไม่จำเป็น',
-            'Do not send passwords or unnecessary financial information.',
-          )}
-        </p>
+          <option value="civil" className="bg-primary-dark text-white">{t('คดีแพ่ง', 'Civil Case')}</option>
+          <option value="criminal" className="bg-primary-dark text-white">{t('คดีอาญา', 'Criminal Case')}</option>
+          <option value="family" className="bg-primary-dark text-white">{t('คดีครอบครัว', 'Family Law')}</option>
+          <option value="inheritance" className="bg-primary-dark text-white">{t('คดีมรดก', 'Inheritance')}</option>
+          <option value="other" className="bg-primary-dark text-white">{t('อื่นๆ', 'Other')}</option>
+        </select>
       </div>
+
+      <div className="space-y-2">
+        <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-gold/80">
+          {t('รายละเอียดเบื้องต้น', 'Case Brief')}
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows={3}
+          className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/20 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold resize-none"
+          placeholder={t('ระบุรายละเอียดเบื้องต้นหรือคำถามของท่าน...', 'Briefly describe your situation or question...')}
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={status === 'submitting'}
+        className={cn(
+          "motion-action group mt-2 flex h-14 items-center justify-center gap-2 rounded-lg bg-gold px-8 py-4 text-sm font-bold text-primary-dark transition-all hover:bg-gold-soft focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-primary-dark disabled:opacity-50",
+          status === 'submitting' && "cursor-not-allowed"
+        )}
+      >
+        {status === 'submitting' ? (
+          <>
+            <Loader2 className="size-5 animate-spin" />
+            {t('กำลังส่งข้อมูล...', 'Sending...')}
+          </>
+        ) : (
+          <>
+            <Send className="size-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            {t('ส่งข้อมูลเพื่อขอรับการประเมิน', 'Request Case Evaluation')}
+          </>
+        )}
+      </button>
+      
+      <p className="mt-2 text-center text-[11px] leading-relaxed text-primary-foreground/40">
+        {t(
+          '* ข้อมูลของท่านจะถูกเก็บเป็นความลับตามมาตรฐานวิชาชีพทนายความ',
+          '* Your information will be kept strictly confidential under legal professional standards.',
+        )}
+      </p>
     </form>
   )
 }

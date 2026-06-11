@@ -52,27 +52,26 @@ export function TeamPreviewSection() {
   ] as const
 
   return (
-    <section className="py-16 md:py-22">
+    <section className="py-24 md:py-32">
       <Container>
         <SectionHeading
           align="center"
-          eyebrow={t('Lawyers, Advisors & Legal Team', 'Lawyers, Advisors & Legal Team')}
           title={t('ทนายความ ที่ปรึกษา และทีมงาน', 'Lawyers, Advisors & Team')}
           description={t(
             `นำโดยนายเกษม ฉิมพลี หัวหน้าสำนักงาน ผู้มีประสบการณ์เป็นทนายความมากกว่า 19 ปี พร้อมทีมงานทนายความมากกว่า 9 คน ที่พร้อมให้คำปรึกษาและดำเนินคดีอย่างเป็นระบบ`,
             `Led by Mr. Kasem Chimphlee, Head of Office with over 19 years of experience, and a team of more than 9 lawyers ready for systematic legal action.`,
           )}
         />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {teamPreviewCards.map((card) => (
             <article
               key={card.title}
-              className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:-translate-y-1 hover:border-gold/60 hover:shadow-lg"
+              className="rounded-xl border border-border bg-card p-6 shadow-sm transition hover:-translate-y-1 hover:border-gold/60 hover:shadow-lg"
             >
-              <span className="flex size-12 items-center justify-center rounded-xl bg-burgundy text-gold">
+              <span className="flex size-12 items-center justify-center rounded-xl bg-jade-soft text-jade">
                 <card.icon className="size-6" aria-hidden="true" />
               </span>
-              <h3 className="mt-5 font-serif text-xl font-bold text-burgundy">{card.title}</h3>
+              <h3 className="mt-5 font-serif text-xl font-bold text-primary">{card.title}</h3>
               <p className="mt-2 text-sm leading-7 text-muted-foreground">{card.description}</p>
             </article>
           ))}
@@ -80,7 +79,7 @@ export function TeamPreviewSection() {
         <div className="mt-8 text-center">
           <Link
             href={getLocalePath('/team', locale)}
-            className="inline-flex items-center gap-2 rounded-lg border border-burgundy px-5 py-3 text-sm font-bold text-burgundy transition hover:bg-burgundy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex items-center gap-2 rounded-lg border border-primary px-5 py-3 text-sm font-bold text-primary transition hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             {t('ดูทีมงานของเรา', 'View Our Team')}
             <ArrowRight className="size-4" aria-hidden="true" />

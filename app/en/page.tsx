@@ -64,17 +64,19 @@ export default function EnglishHomePage() {
 
       <section className="relative z-10 -mt-5 pb-12 md:-mt-8">
         <Container>
-          <div className="grid overflow-hidden rounded-2xl border border-gold/25 bg-card shadow-xl sm:grid-cols-2 lg:grid-cols-4">
+          <div className="home-trust-grid grid overflow-hidden rounded-2xl border border-gold/25 bg-card shadow-xl sm:grid-cols-2 lg:grid-cols-4">
             {trustCards.map((card) => (
               <Link
                 key={card.href}
                 href={card.href}
-                className="group border-b border-border p-5 transition hover:bg-secondary/70 sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
+                className="home-trust-card group border-b border-border p-5 transition sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:border-r lg:last:border-r-0"
               >
-                <card.icon className="size-6 text-gold" aria-hidden="true" />
+                <span className="home-trust-icon transition-colors">
+                  <card.icon className="size-5" aria-hidden="true" />
+                </span>
                 <h2 className="mt-3 font-serif text-lg font-bold text-primary">{card.title}</h2>
                 <p className="mt-1 text-xs leading-5 text-muted-foreground">{card.description}</p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-primary">
+                <span className="home-trust-link mt-3 inline-flex items-center gap-1 text-xs font-bold">
                   Learn More
                   <ArrowRight className="size-3.5 transition group-hover:translate-x-1" aria-hidden="true" />
                 </span>
@@ -125,11 +127,11 @@ export default function EnglishHomePage() {
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
             {processSteps.map((step, index) => (
-              <article key={step.title} className="relative rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <article key={step.title} className="home-process-card relative rounded-xl border bg-card p-6 shadow-sm transition-colors">
                 <span className="absolute right-5 top-4 font-serif text-4xl font-bold text-gold/25">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className="flex size-11 items-center justify-center rounded-xl bg-primary text-gold">
+                <span className="home-process-icon flex size-11 items-center justify-center rounded-lg">
                   <step.icon className="size-5" aria-hidden="true" />
                 </span>
                 <h3 className="mt-5 font-serif text-lg font-bold text-primary">{step.title}</h3>
