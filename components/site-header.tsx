@@ -385,7 +385,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="max-h-[calc(100vh-8.5rem)] overflow-y-auto border-t border-gold/20 bg-burgundy-dark text-burgundy-foreground lg:hidden"
+          className="max-h-[calc(100vh-8.5rem)] overflow-y-auto border-t border-gold/40 bg-white text-foreground lg:hidden"
         >
           <Container className="py-3">
             <nav aria-label={t('เมนูมือถือ', 'Mobile Menu')}>
@@ -427,8 +427,8 @@ export function SiteHeader() {
                     href={localizedHref}
                     onClick={closeNavigation}
                     className={cn(
-                      'block border-b border-white/10 px-3 py-3 text-sm font-semibold transition hover:bg-white/5 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
-                      active ? 'text-gold' : 'text-burgundy-foreground/90',
+                      'block border-b border-border/60 px-3 py-3 text-sm font-semibold transition hover:bg-secondary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                      active ? 'bg-secondary/40 text-primary font-bold' : 'text-foreground/90',
                     )}
                   >
                     {t(link.label, link.labelEn)}
@@ -438,7 +438,7 @@ export function SiteHeader() {
               <Link
                 href={getLocalePath(navigationCta.href, locale)}
                 onClick={closeNavigation}
-                className="mt-4 block rounded-lg bg-gold px-4 py-3 text-center text-sm font-bold text-burgundy-dark transition hover:bg-gold-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="mt-4 block rounded-lg bg-gold px-4 py-3 text-center text-sm font-bold text-burgundy-dark shadow-sm transition hover:bg-gold-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy"
               >
                 {t(navigationCta.label, navigationCta.labelEn)}
               </Link>
