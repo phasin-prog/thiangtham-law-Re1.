@@ -6,14 +6,14 @@
 
 @theme inline {
   --font-heading: var(--font-serif);
-  --font-sans: var(--font-noto-thai), 'Geist Fallback';
-  --font-serif: var(--font-noto-serif-thai), Georgia, serif;
-  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
+  --font-sans: Tahoma, 'Leelawadee UI', Arial, sans-serif;
+  --font-serif: 'Th Sarabun New', 'Leelawadee UI', Tahoma, serif;
+  --font-mono: Consolas, 'Courier New', monospace;
 
   /* Brand colors */
-  --color-burgundy: var(--burgundy);
-  --color-burgundy-dark: var(--burgundy-dark);
-  --color-burgundy-foreground: var(--burgundy-foreground);
+  --color-navy: var(--navy);
+  --color-navy-dark: var(--navy-dark);
+  --color-navy-foreground: var(--navy-foreground);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-ivory: var(--ivory);
@@ -43,6 +43,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-dark: var(--primary-dark);
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
@@ -60,28 +61,29 @@
 }
 
 :root {
-  /* Brand palette */
-  --burgundy: oklch(0.33 0.105 22);
-  --burgundy-dark: oklch(0.26 0.09 22);
-  --burgundy-foreground: oklch(0.97 0.012 85);
-  --gold: oklch(0.74 0.115 78);
-  --gold-soft: oklch(0.82 0.085 82);
+  /* Brand colors */
+  --navy: oklch(0.28 0.055 250);
+  --navy-dark: oklch(0.2 0.045 250);
+  --navy-foreground: oklch(0.97 0.01 88);
+  --gold: oklch(0.72 0.11 82);
+  --gold-soft: oklch(0.84 0.075 86);
   --ivory: oklch(0.972 0.012 84);
   --charcoal: oklch(0.27 0.015 40);
 
   --radius: 0.5rem;
 
   /* Semantic tokens mapped to brand */
-  --background: oklch(0.972 0.012 84);
-  --foreground: oklch(0.27 0.015 40);
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.27 0.015 40);
+  --card-foreground: var(--charcoal);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.27 0.015 40);
-  --primary: oklch(0.33 0.105 22);
-  --primary-foreground: oklch(0.972 0.012 84);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--navy);
+  --primary-dark: var(--navy-dark);
+  --primary-foreground: var(--navy-foreground);
   --secondary: oklch(0.94 0.015 84);
-  --secondary-foreground: oklch(0.33 0.105 22);
+  --secondary-foreground: var(--navy);
   --muted: oklch(0.94 0.015 84);
   --muted-foreground: oklch(0.48 0.02 40);
   --accent: oklch(0.74 0.115 78);
@@ -90,17 +92,17 @@
   --border: oklch(0.88 0.012 80);
   --input: oklch(0.88 0.012 80);
   --ring: oklch(0.74 0.115 78);
-  --chart-1: oklch(0.33 0.105 22);
+  --chart-1: var(--navy);
   --chart-2: oklch(0.74 0.115 78);
   --chart-3: oklch(0.5 0.06 40);
   --chart-4: oklch(0.6 0.09 60);
   --chart-5: oklch(0.43 0.08 30);
-  --sidebar: oklch(0.972 0.012 84);
-  --sidebar-foreground: oklch(0.27 0.015 40);
-  --sidebar-primary: oklch(0.33 0.105 22);
-  --sidebar-primary-foreground: oklch(0.972 0.012 84);
+  --sidebar: var(--ivory);
+  --sidebar-foreground: var(--charcoal);
+  --sidebar-primary: var(--navy);
+  --sidebar-primary-foreground: var(--navy-foreground);
   --sidebar-accent: oklch(0.94 0.015 84);
-  --sidebar-accent-foreground: oklch(0.33 0.105 22);
+  --sidebar-accent-foreground: var(--navy);
   --sidebar-border: oklch(0.88 0.012 80);
   --sidebar-ring: oklch(0.74 0.115 78);
 }
@@ -111,9 +113,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 10rem;
   }
 }
 

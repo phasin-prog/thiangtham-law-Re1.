@@ -1,12 +1,5 @@
-import { ServiceDetail } from '@/components/service-detail'
-import { services } from '@/lib/site-data'
+import { redirect } from 'next/navigation'
 
-export default function LegalAdvisoryPage() {
-  const service = services.find((item) => item.slug === 'legal-advisory')
-
-  if (!service) {
-    throw new Error('Service "legal-advisory" not found')
-  }
-
-  return <ServiceDetail service={service} />
+export default function LegalAdvisoryAliasPage() {
+  redirect('/services/business')
 }

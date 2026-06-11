@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-burgundy-dark to-gray-900 flex items-center justify-center px-4 py-8 overflow-y-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-gray-900 via-primary-dark to-gray-900 flex items-center justify-center px-4 py-8 overflow-y-auto">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
@@ -16,7 +16,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
         <div className="mb-12 text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 mb-4">
             <div className="w-12 h-12 bg-gold rounded-lg flex items-center justify-center">
-              <Gavel size={24} className="text-burgundy-dark" />
+              <Gavel size={24} className="text-primary-dark" />
             </div>
             <span className="text-2xl font-bold text-white">เที่ยงธรรมทนายความ</span>
           </Link>

@@ -4,7 +4,7 @@ import { SectionHeading } from '@/components/section-heading'
 
 export function ContactCTA() {
   return (
-    <section className="bg-burgundy-dark text-burgundy-foreground">
+    <section className="bg-primary-dark text-primary-foreground">
       <div className="mx-auto max-w-6xl px-4 py-14 md:py-16">
         <SectionHeading
           align="center"
@@ -52,13 +52,13 @@ export function ContactCTA() {
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : undefined}
               rel="noreferrer"
-              className="flex items-start gap-3 rounded-lg border border-gold/30 bg-burgundy p-4 transition-colors hover:border-gold"
+              className="flex items-start gap-3 rounded-lg border border-gold/30 bg-primary p-4 transition-colors hover:border-gold"
             >
               <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold/15">
                 <item.icon className="size-5 text-gold" aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block text-xs text-burgundy-foreground/70">
+                <span className="block text-xs text-primary-foreground/70">
                   {item.label}
                 </span>
                 <span className="block break-words text-sm font-medium">
@@ -72,14 +72,14 @@ export function ContactCTA() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <a
             href={`tel:${siteConfig.phones[0].replace(/-/g, '')}`}
-            className="flex items-center gap-2 rounded-md bg-gold px-5 py-3 text-sm font-semibold text-burgundy-dark transition-colors hover:bg-gold-soft"
+            className="flex items-center gap-2 rounded-md bg-gold px-5 py-3 text-sm font-semibold text-primary-dark transition-colors hover:bg-gold-soft"
           >
             <Phone className="size-4" aria-hidden="true" />
             โทร {siteConfig.phones[0]}
           </a>
           <a
             href={`tel:${siteConfig.phones[1].replace(/-/g, '')}`}
-            className="flex items-center gap-2 rounded-md border border-gold/60 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-burgundy"
+            className="flex items-center gap-2 rounded-md border border-gold/60 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-primary"
           >
             <Phone className="size-4" aria-hidden="true" />
             โทร {siteConfig.phones[1]}
@@ -88,7 +88,7 @@ export function ContactCTA() {
             href={`https://line.me/R/ti/p/~${siteConfig.line}`}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-md border border-gold/60 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-burgundy"
+            className="flex items-center gap-2 rounded-md border border-gold/60 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-primary"
           >
             <MessageCircle className="size-4" aria-hidden="true" />
             ติดต่อผ่าน LINE
@@ -97,7 +97,7 @@ export function ContactCTA() {
             href={siteConfig.mapUrl}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 rounded-md border border-gold/60 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-burgundy"
+            className="flex items-center gap-2 rounded-md border border-gold/60 px-5 py-3 text-sm font-semibold text-gold transition-colors hover:bg-primary"
           >
             <MapPin className="size-4" aria-hidden="true" />
             เปิดแผนที่

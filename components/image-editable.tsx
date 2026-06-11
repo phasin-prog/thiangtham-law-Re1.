@@ -61,7 +61,7 @@ export default function ImageEditable({ storageKey, defaultSrc, alt, className }
               className="mt-1 w-full rounded border px-2 py-1"
             />
             <div className="mt-2 flex gap-2">
-              <button onClick={save} className="rounded bg-burgundy px-3 py-1 text-white text-sm">Save</button>
+              <button onClick={save} className="rounded bg-primary px-3 py-1 text-white text-sm">Save</button>
               <button onClick={() => setEditing(false)} className="rounded border px-3 py-1 text-sm">Cancel</button>
               <button onClick={reset} className="ml-auto rounded border px-3 py-1 text-sm">Reset</button>
             </div>

@@ -75,8 +75,8 @@ export default function AuthPanel() {
       <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <button onClick={() => setView('login')} className={`px-3 py-1 ${view === 'login' ? 'bg-burgundy text-white rounded' : 'text-muted-foreground'}`}>เข้าสู่ระบบ</button>
-            <button onClick={() => setView('register')} className={`px-3 py-1 ${view === 'register' ? 'bg-burgundy text-white rounded' : 'text-muted-foreground'}`}>สมัครสมาชิก</button>
+            <button onClick={() => setView('login')} className={`px-3 py-1 ${view === 'login' ? 'bg-primary text-white rounded' : 'text-muted-foreground'}`}>เข้าสู่ระบบ</button>
+            <button onClick={() => setView('register')} className={`px-3 py-1 ${view === 'register' ? 'bg-primary text-white rounded' : 'text-muted-foreground'}`}>สมัครสมาชิก</button>
           </div>
           {user && (
             <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export default function AuthPanel() {
               <label className="text-sm text-muted-foreground">Password</label>
               <input required type="password" value={loginForm.password} onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })} className="w-full rounded border px-2 py-2" />
               <div className="flex items-center gap-2">
-                <button className="rounded bg-burgundy px-3 py-1 text-sm text-white">เข้าสู่ระบบ</button>
+                <button className="rounded bg-primary px-3 py-1 text-sm text-white">เข้าสู่ระบบ</button>
                 <div className="text-sm">{status}</div>
               </div>
             </div>
@@ -129,8 +129,8 @@ export default function AuthPanel() {
             <div className="space-y-2">
               <label className="text-sm text-muted-foreground">บทบาท</label>
               <div className="flex gap-2">
-                <button type="button" onClick={() => setRegForm({ ...regForm, role: 'customer' })} className={`px-3 py-1 ${regForm.role === 'customer' ? 'bg-burgundy text-white rounded' : 'border rounded'}`}>ลูกค้า</button>
-                <button type="button" onClick={() => setRegForm({ ...regForm, role: 'staff' })} className={`px-3 py-1 ${regForm.role === 'staff' ? 'bg-burgundy text-white rounded' : 'border rounded'}`}>ทีมงาน</button>
+                <button type="button" onClick={() => setRegForm({ ...regForm, role: 'customer' })} className={`px-3 py-1 ${regForm.role === 'customer' ? 'bg-primary text-white rounded' : 'border rounded'}`}>ลูกค้า</button>
+                <button type="button" onClick={() => setRegForm({ ...regForm, role: 'staff' })} className={`px-3 py-1 ${regForm.role === 'staff' ? 'bg-primary text-white rounded' : 'border rounded'}`}>ทีมงาน</button>
               </div>
 
               <label className="text-sm text-muted-foreground">วันเกิด</label>
@@ -171,7 +171,7 @@ export default function AuthPanel() {
               </div>
 
               <div className="mt-3 flex items-center gap-2">
-                <button className="rounded bg-burgundy px-3 py-1 text-sm text-white">สมัครสมาชิก</button>
+                <button className="rounded bg-primary px-3 py-1 text-sm text-white">สมัครสมาชิก</button>
                 <div className="text-sm">{status}</div>
               </div>
             </div>

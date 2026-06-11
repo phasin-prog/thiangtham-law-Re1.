@@ -6,7 +6,7 @@ import { DisclaimerBlock } from '@/components/disclaimer-block'
 import { services } from '@/lib/site-data'
 
 const inputClass =
-  'mt-1.5 w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-burgundy focus:ring-2 focus:ring-gold/40'
+  'mt-1.5 w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-gold/40'
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
@@ -14,8 +14,8 @@ export function ContactForm() {
   if (submitted) {
     return (
       <div className="rounded-lg border border-border bg-card p-8 text-center">
-        <CheckCircle2 className="mx-auto size-12 text-burgundy" aria-hidden="true" />
-        <h3 className="mt-4 font-serif text-xl font-bold text-burgundy">
+        <CheckCircle2 className="mx-auto size-12 text-primary" aria-hidden="true" />
+        <h3 className="mt-4 font-serif text-xl font-bold text-primary">
           ได้รับข้อมูลของท่านแล้ว
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -24,7 +24,7 @@ export function ContactForm() {
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-6 rounded-md border border-burgundy px-5 py-2.5 text-sm font-semibold text-burgundy transition-colors hover:bg-burgundy hover:text-burgundy-foreground"
+          className="mt-6 rounded-md border border-primary px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
         >
           ส่งข้อมูลอีกครั้ง
         </button>
@@ -43,13 +43,13 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor="name" className="text-sm font-medium text-card-foreground">
-            ชื่อ-นามสกุล <span className="text-burgundy">*</span>
+            ชื่อ-นามสกุล <span className="text-primary">*</span>
           </label>
           <input id="name" name="name" required className={inputClass} />
         </div>
         <div>
           <label htmlFor="phone" className="text-sm font-medium text-card-foreground">
-            เบอร์โทร <span className="text-burgundy">*</span>
+            เบอร์โทร <span className="text-primary">*</span>
           </label>
           <input id="phone" name="phone" type="tel" required className={inputClass} />
         </div>
@@ -118,7 +118,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="mt-6 w-full rounded-md bg-burgundy px-6 py-3 text-sm font-semibold text-burgundy-foreground transition-colors hover:bg-burgundy-dark"
+        className="mt-6 w-full rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-dark"
       >
         ส่งข้อมูลเพื่อให้ติดต่อกลับ
       </button>

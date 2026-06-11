@@ -1,142 +1,113 @@
-import { ContactCTA } from '@/components/contact-cta'
-import { SectionHeading } from '@/components/section-heading'
-import type { Service } from '@/lib/site-data'
+import { CheckCircle2, FileText, Info, SearchCheck } from 'lucide-react'
+import { Container } from '@/components/container'
+import { CTASection } from '@/components/cta-section'
+import { PageHero } from '@/components/page-hero'
+import type { LegalService } from '@/lib/data/services'
 
-export function ServiceDetail({ service }: { service: Service }) {
+export function ServiceDetail({
+  service,
+  locale = 'th',
+}: {
+  service: LegalService
+  locale?: 'th' | 'en'
+}) {
+  const isEnglish = locale === 'en'
+  const homeHref = isEnglish ? '/en' : '/'
+  const servicesHref = isEnglish ? '/en/services' : '/services'
+
   return (
     <main>
-      <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <SectionHeading
-            eyebrow="บริการกฎหมาย"
-            title={service.title}
-            description={service.short}
-          />
+      <PageHero
+        title={service.title}
+        description={service.description}
+        crumbs={[
+          { href: homeHref, label: isEnglish ? 'Home' : 'หน้าแรก' },
+          { href: servicesHref, label: isEnglish ? 'Legal Services' : 'บริการกฎหมาย' },
+          { label: service.title },
+        ]}
+      />
 
-          <div className="mt-8 grid gap-10 lg:grid-cols-[2fr_1fr]">
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[1fr_340px]">
             <div className="space-y-8">
-              <div className="rounded-3xl border border-border bg-card p-7">
+              <section className="rounded-2xl border border-border bg-card p-6 md:p-8">
                 <h2 className="font-serif text-2xl font-bold text-burgundy">
-                  บทนำเกี่ยวกับ {service.title}
+                  {isEnglish ? 'Service Overview' : 'ภาพรวมบริการ'}
                 </h2>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {service.intro}
-                </p>
-              </div>
+                <p className="mt-4 leading-8 text-muted-foreground">{service.overview}</p>
+              </section>
 
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  ปัญหาที่พบบ่อย
-                </h3>
-                <div className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  {service.commonProblems.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-burgundy" />
-                      <p>{item}</p>
+              <section>
+                <div className="flex items-center gap-3">
+                  <SearchCheck className="size-6 text-gold" aria-hidden="true" />
+                  <h2 className="font-serif text-2xl font-bold text-burgundy">
+                    {isEnglish ? 'Common Legal Issues' : 'ปัญหาที่พบบ่อย'}
+                  </h2>
+                </div>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {service.topics.map((topic) => (
+                    <div key={topic} className="flex items-start gap-3 rounded-xl border border-border bg-card p-4">
+                      <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-burgundy" aria-hidden="true" />
+                      <p className="text-sm leading-6">{topic}</p>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
 
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  เราช่วยอะไรได้บ้าง
-                </h3>
-                <div className="mt-4 space-y-3 text-sm text-muted-foreground">
+              {service.note && (
+                <section className="rounded-2xl border border-gold/40 bg-secondary/70 p-6">
+                  <div className="flex items-center gap-3">
+                    <Info className="size-5 text-burgundy" aria-hidden="true" />
+                    <h2 className="font-serif text-xl font-bold text-burgundy">{service.noteTitle}</h2>
+                  </div>
+                  <p className="mt-3 leading-7 text-muted-foreground">{service.note}</p>
+                </section>
+              )}
+
+              <section className="rounded-2xl bg-burgundy p-6 text-burgundy-foreground md:p-8">
+                <h2 className="font-serif text-2xl font-bold text-gold">
+                  {isEnglish ? 'How Our Office Can Help' : 'สำนักงานช่วยอะไรได้บ้าง'}
+                </h2>
+                <div className="mt-5 grid gap-4">
                   {service.help.map((item) => (
                     <div key={item} className="flex items-start gap-3">
-                      <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-burgundy" />
-                      <p>{item}</p>
+                      <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden="true" />
+                      <p className="leading-7 text-burgundy-foreground/85">{item}</p>
                     </div>
                   ))}
                 </div>
-              </div>
-
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  เอกสารที่ควรเตรียม
-                </h3>
-                <div className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  {service.documents.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-burgundy" />
-                      <p>{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  ขั้นตอนการทำงาน
-                </h3>
-                <div className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  {service.steps.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <span className="mt-1 inline-flex h-2.5 w-2.5 rounded-full bg-burgundy" />
-                      <p>{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  คำถามที่พบบ่อย
-                </h3>
-                <div className="mt-4 space-y-4 text-sm text-muted-foreground">
-                  {service.faq.map((item) => (
-                    <div key={item.q}>
-                      <p className="font-semibold text-burgundy">{item.q}</p>
-                      <p className="mt-2 leading-relaxed">{item.a}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              </section>
             </div>
 
-            <aside className="space-y-6">
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  เหมาะสำหรับผู้ที่
-                </h3>
-                <div className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  <p>
-                    หากคุณกำลังเผชิญข้อพิพาททางกฎหมาย ต้องการคำปรึกษา หรืออยากได้แนวทางในการเตรียมเอกสาร เราพร้อมช่วยเหลือทุกขั้นตอน
-                  </p>
-                </div>
+            <aside className="h-fit rounded-2xl border border-border bg-card p-6 shadow-sm lg:sticky lg:top-28">
+              <div className="flex items-center gap-3">
+                <FileText className="size-6 text-gold" aria-hidden="true" />
+                <h2 className="font-serif text-xl font-bold text-burgundy">
+                  {isEnglish ? 'Documents to Prepare' : 'เอกสารที่ควรเตรียม'}
+                </h2>
               </div>
-
-              <div className="rounded-3xl border border-border bg-card p-7">
-                <h3 className="font-serif text-xl font-bold text-burgundy">
-                  ติดต่อเราเพื่อเริ่มต้น
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  นัดหมายปรึกษาเบื้องต้น เพื่อให้ทนายประเมินข้อมูลและวางแนวทางการทำงานที่เหมาะสมกับคดีของคุณ
-                </p>
-                <div className="mt-6 grid gap-3">
-                  <a
-                    href="tel:0823772404"
-                    className="rounded-md bg-burgundy px-4 py-3 text-sm font-semibold text-burgundy-foreground transition-colors hover:bg-burgundy-dark"
-                  >
-                    โทรปรึกษาเบื้องต้น
-                  </a>
-                  <a
-                    href="https://line.me/R/ti/p/~Kasemchimphlee"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="rounded-md border border-burgundy px-4 py-3 text-sm font-semibold text-burgundy transition-colors hover:bg-burgundy/10"
-                  >
-                    ติดต่อผ่าน LINE
-                  </a>
-                </div>
-              </div>
+              <ul className="mt-5 space-y-4">
+                {service.documentsToPrepare.map((document) => (
+                  <li key={document} className="flex items-start gap-3 text-sm leading-6 text-muted-foreground">
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-gold" />
+                    {document}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 border-t border-border pt-5 text-xs leading-6 text-muted-foreground">
+                {isEnglish
+                  ? 'If your documents are incomplete, send what you have and our team can advise what else may be needed.'
+                  : 'หากเอกสารยังไม่ครบ สามารถส่งรายละเอียดที่มีเพื่อให้ทีมงานช่วยแนะนำรายการเพิ่มเติมได้'}
+              </p>
             </aside>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <ContactCTA />
+      <CTASection
+        title={isEnglish ? `Need advice about ${service.title}?` : `ต้องการปรึกษาเรื่อง${service.title}?`}
+      />
     </main>
   )
 }

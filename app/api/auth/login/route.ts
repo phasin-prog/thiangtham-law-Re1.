@@ -11,7 +11,13 @@ export async function POST(req: Request) {
 
     const token = createTokenForUser(user)
     const res = NextResponse.json({ ok: true, user: { id: user.id, username: user.username, name: user.name, role: user.role } })
-    res.headers.append('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}`)
+    res.cookies.set('token', token, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 7,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    })
     return res
   } catch (e: any) {
     return NextResponse.json({ error: e.message || 'server_error' }, { status: 500 })

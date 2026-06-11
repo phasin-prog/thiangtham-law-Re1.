@@ -77,14 +77,14 @@ export default function AdminPage() {
       <h1 className="mb-4 text-2xl font-bold">Admin — Edit Data</h1>
 
       <div className="mb-4 flex gap-2">
-        <button onClick={() => setEditing('lawyers')} className={`px-3 py-1 ${editing === 'lawyers' ? 'bg-burgundy text-white' : 'border'}`}>Lawyers</button>
-        <button onClick={() => setEditing('advisors')} className={`px-3 py-1 ${editing === 'advisors' ? 'bg-burgundy text-white' : 'border'}`}>Advisors</button>
-        <button onClick={() => setEditing('team')} className={`px-3 py-1 ${editing === 'team' ? 'bg-burgundy text-white' : 'border'}`}>Team</button>
+        <button onClick={() => setEditing('lawyers')} className={`px-3 py-1 ${editing === 'lawyers' ? 'bg-primary text-white' : 'border'}`}>Lawyers</button>
+        <button onClick={() => setEditing('advisors')} className={`px-3 py-1 ${editing === 'advisors' ? 'bg-primary text-white' : 'border'}`}>Advisors</button>
+        <button onClick={() => setEditing('team')} className={`px-3 py-1 ${editing === 'team' ? 'bg-primary text-white' : 'border'}`}>Team</button>
       </div>
 
       <div className="mb-4 flex gap-2">
         <input type="file" onChange={handleFile} />
-        <button onClick={save} className="rounded bg-burgundy px-3 py-1 text-white">Save to file</button>
+        <button onClick={save} className="rounded bg-primary px-3 py-1 text-white">Save to file</button>
         <div className="ml-2 text-sm">{status}</div>
       </div>
 

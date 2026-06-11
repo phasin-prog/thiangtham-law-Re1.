@@ -1,41 +1,25 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ServiceDetail } from '@/components/service-detail'
-import { services } from '@/lib/site-data'
+import { getLegalService, serviceRouteSlugs } from '@/lib/data/services'
 
-type Props = {
-  params: {
-    slug: string
-  }
-}
+type Props = { params: Promise<{ slug: string }> }
 
-export async function generateStaticParams() {
-  return services.map((service) => ({
-    slug: service.slug,
-  }))
+export function generateStaticParams() {
+  return serviceRouteSlugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = services.find((item) => item.slug === params.slug)
-
-  if (!service) {
-    return {
-      title: 'บริการทางกฎหมาย',
-    }
-  }
-
-  return {
-    title: `${service.title} | สำนักกฎหมายเที่ยงธรรมทนายความ`,
-    description: service.short,
-  }
+  const { slug } = await params
+  const service = getLegalService(slug)
+  return service
+    ? { title: service.title, description: service.description }
+    : { title: 'ไม่พบบริการ' }
 }
 
-export default function ServiceDetailPage({ params }: Props) {
-  const service = services.find((item) => item.slug === params.slug)
-
-  if (!service) {
-    notFound()
-  }
-
+export default async function ServicePage({ params }: Props) {
+  const { slug } = await params
+  const service = getLegalService(slug)
+  if (!service) notFound()
   return <ServiceDetail service={service} />
 }

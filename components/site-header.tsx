@@ -1,215 +1,394 @@
- 'use client'
+'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Phone, MessageCircle, Menu, X, Scale } from 'lucide-react'
+import {
+  ChevronDown,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  Search,
+  X,
+} from 'lucide-react'
+import { Container } from '@/components/container'
+import { MobileNavigationAccordion } from '@/components/mobile-services-accordion'
+import {
+  LegalKnowledgeDropdown,
+  ServicesMegaMenu,
+} from '@/components/services-mega-menu'
+import {
+  headerNavigation,
+  legalKnowledgeMenuGroups,
+  navigationCta,
+  serviceMenuGroups,
+} from '@/lib/data/navigation'
+import { officeContact, officeInfo } from '@/lib/data/office'
+import { useTranslation, getLocalePath } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
-import { siteConfig, navLinks } from '@/lib/site-data'
+
+type DropdownKey = 'services' | 'knowledge'
+
+function isActiveRoute(pathname: string, href: string) {
+  return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
+}
+
+function TopInfoBar() {
+  const { locale, switchLocale, t } = useTranslation()
+
+  return (
+    <div className="bg-burgundy-dark text-burgundy-foreground/80">
+      <Container className="flex min-h-9 items-center justify-between gap-4 py-1.5 text-[11px]">
+        <a
+          href={officeContact.mapUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="hidden min-w-0 items-center gap-1.5 transition hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold md:flex"
+        >
+          <MapPin className="size-3.5 shrink-0 text-gold" aria-hidden="true" />
+          <span className="truncate">
+            {t('ที่อยู่:', 'Address:')} {t(officeContact.address, officeContact.addressEn)}
+          </span>
+        </a>
+        <div className="flex w-full items-center justify-center gap-4 md:w-auto md:justify-end">
+          <a
+            href={`tel:${officeContact.phones[0].replace(/-/g, '')}`}
+            className="inline-flex items-center gap-1.5 transition hover:text-gold"
+          >
+            <Phone className="size-3.5 text-gold" aria-hidden="true" />
+            <span>{officeContact.phones[0]}</span>
+          </a>
+          <a
+            href={`https://line.me/R/ti/p/~${officeContact.line}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 transition hover:text-gold"
+          >
+            <MessageCircle className="size-3.5 text-gold" aria-hidden="true" />
+            <span>Line</span>
+          </a>
+
+          <div className="flex items-center border-l border-white/20 pl-4 ml-2 gap-2">
+            <button
+              onClick={() => switchLocale('th')}
+              className={cn(
+                'px-1.5 py-0.5 rounded transition hover:text-gold',
+                locale === 'th' ? 'bg-gold text-burgundy-dark font-bold' : 'opacity-70',
+              )}
+            >
+              TH
+            </button>
+            <span className="opacity-20 text-[10px]">|</span>
+            <button
+              onClick={() => switchLocale('en')}
+              className={cn(
+                'px-1.5 py-0.5 rounded transition hover:text-gold',
+                locale === 'en' ? 'bg-gold text-burgundy-dark font-bold' : 'opacity-70',
+              )}
+            >
+              EN
+            </button>
+          </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+
+function BrandingHeader({
+  mobileOpen,
+  onToggleMobile,
+}: {
+  mobileOpen: boolean
+  onToggleMobile: () => void
+}) {
+  const { locale, t } = useTranslation()
+
+  return (
+    <div className="border-b border-border bg-ivory text-foreground">
+      <Container className="flex min-h-24 items-center justify-between gap-3 overflow-hidden py-3 sm:gap-5">
+        <Link
+          href={getLocalePath('/', locale)}
+          className="flex min-w-0 max-w-[calc(100%-3.5rem)] flex-1 items-center gap-3 overflow-hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:max-w-none"
+        >
+          <Image
+            src="/law-office-logo.svg"
+            alt=""
+            width={64}
+            height={64}
+            priority
+            className="size-14 shrink-0 rounded-xl border border-gold/40 bg-burgundy sm:size-16"
+          />
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-serif text-sm font-bold text-burgundy sm:text-2xl">
+              {t(officeInfo.name, officeInfo.englishName)}
+            </span>
+            <span className="mt-1 block truncate text-[9px] font-semibold tracking-[0.12em] text-muted-foreground sm:text-xs sm:tracking-[0.16em]">
+              {officeInfo.englishName}
+            </span>
+          </span>
+        </Link>
+
+        <div className="flex shrink-0 items-center gap-2">
+          <a
+            href={`tel:${officeContact.phones[0].replace(/-/g, '')}`}
+            className="hidden items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-xs font-semibold text-burgundy transition hover:border-gold lg:inline-flex"
+          >
+            <Phone className="size-4 text-gold" aria-hidden="true" />
+            {officeContact.phones[0]}
+          </a>
+          <a
+            href={`https://line.me/R/ti/p/~${officeContact.line}`}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-xs font-semibold text-burgundy transition hover:border-gold lg:inline-flex"
+          >
+            <MessageCircle className="size-4 text-gold" aria-hidden="true" />
+            LINE
+          </a>
+          <Link
+            href={getLocalePath(navigationCta.href, locale)}
+            className="hidden rounded-lg bg-gold px-4 py-2.5 text-sm font-bold text-burgundy-dark transition hover:bg-gold-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy md:block"
+          >
+            {t(navigationCta.label, navigationCta.labelEn)}
+          </Link>
+          <button
+            type="button"
+            onClick={onToggleMobile}
+            className="flex size-11 items-center justify-center rounded-lg border border-burgundy/25 text-burgundy transition hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:hidden"
+            aria-label={mobileOpen ? t('ปิดเมนู', 'Close Menu') : t('เปิดเมนู', 'Open Menu')}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+          >
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
 
 export function SiteHeader() {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
-  const [user, setUser] = useState<any | null>(null)
+  const { locale, t } = useTranslation()
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState<DropdownKey | null>(null)
+  const servicesTriggerRef = useRef<HTMLButtonElement>(null)
+  const knowledgeTriggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    fetch('/api/auth/me').then((r) => r.json()).then((j) => {
-      setUser(j.user || null)
-    }).catch(() => setUser(null))
-  }, [])
+    if (!openMenu) return
 
-  async function logout() {
-    await fetch('/api/auth/logout', { method: 'POST' })
-    setUser(null)
-    location.reload()
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return
+      event.preventDefault()
+      const trigger =
+        openMenu === 'services' ? servicesTriggerRef.current : knowledgeTriggerRef.current
+      trigger?.focus({ preventScroll: true })
+      setOpenMenu(null)
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [openMenu])
+
+  function closeNavigation() {
+    setMobileOpen(false)
+    setOpenMenu(null)
+  }
+
+  function handleDesktopKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+    if (event.key !== 'Escape' || !openMenu) return
+    event.preventDefault()
+    const trigger =
+      openMenu === 'services' ? servicesTriggerRef.current : knowledgeTriggerRef.current
+    trigger?.focus({ preventScroll: true })
+    setOpenMenu(null)
+  }
+
+  function handleDesktopBlur(event: React.FocusEvent<HTMLElement>) {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      setOpenMenu(null)
+    }
   }
 
   return (
-    <>
-      {/* Top contact bar */}
-      <div className="bg-burgundy-dark text-burgundy-foreground/90">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-1.5 text-xs sm:text-[13px]">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            <a
-              href={`tel:${siteConfig.phones[0].replace(/-/g, '')}`}
-              className="flex items-center gap-1.5 transition-colors hover:text-gold"
-            >
-              <Phone className="size-3.5 text-gold" aria-hidden="true" />
-              <span>
-                {siteConfig.phones[0]} / {siteConfig.phones[1]}
-              </span>
-            </a>
-            <span className="hidden items-center gap-1.5 sm:flex">
-              <MessageCircle className="size-3.5 text-gold" aria-hidden="true" />
-              LINE: {siteConfig.line}
-            </span>
-          </div>
-          <div className="hidden items-center gap-x-5 md:flex">
-            <span>Facebook: {siteConfig.facebook}</span>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="transition-colors hover:text-gold"
-            >
-              {siteConfig.email}
-            </a>
-          </div>
-        </div>
-      </div>
+    <header className="sticky top-0 z-50 shadow-sm">
+      <TopInfoBar />
+      <BrandingHeader
+        mobileOpen={mobileOpen}
+        onToggleMobile={() => setMobileOpen((value) => !value)}
+      />
 
-      {/* Main header */}
-      <header className="sticky top-0 z-50 border-b-2 border-gold/40 bg-burgundy text-burgundy-foreground shadow-sm">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/60 bg-burgundy-dark">
-              <Scale className="size-6 text-gold" aria-hidden="true" />
-            </span>
-            <span className="flex flex-col leading-tight">
-              <span className="font-serif text-base font-bold text-gold sm:text-lg">
-                {siteConfig.name}
-              </span>
-              <span className="text-[11px] tracking-wide text-burgundy-foreground/70">
-                {siteConfig.nameEn} · เดชอุดม อุบลราชธานี
-              </span>
-            </span>
-          </Link>
+      <div className="hidden bg-burgundy text-burgundy-foreground lg:block">
+        <Container>
+          <nav
+            className="relative flex min-h-13 items-center justify-center gap-0.5"
+            aria-label={t('เมนูหลัก', 'Main Menu')}
+            onMouseLeave={() => setOpenMenu(null)}
+            onBlur={handleDesktopBlur}
+            onKeyDown={handleDesktopKeyDown}
+          >
+            {headerNavigation.map((link) => {
+              const localizedHref = getLocalePath(link.href, locale)
+              const active = isActiveRoute(pathname, localizedHref)
+              const dropdownKey: DropdownKey | null =
+                link.href === '/services'
+                  ? 'services'
+                  : link.href === '/legal-knowledge'
+                    ? 'knowledge'
+                    : null
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="เมนูหลัก">
-            {navLinks.map((link) => {
-              const active =
-                link.href === '/'
-                  ? pathname === '/'
-                  : pathname.startsWith(link.href)
+              if (dropdownKey) {
+                const menuOpen = openMenu === dropdownKey
+                const menuId =
+                  dropdownKey === 'services'
+                    ? 'services-mega-menu'
+                    : 'legal-knowledge-menu'
+
+                return (
+                  <div
+                    key={link.href}
+                    className="static"
+                    onMouseEnter={() => setOpenMenu(dropdownKey)}
+                  >
+                    <button
+                      ref={dropdownKey === 'services' ? servicesTriggerRef : knowledgeTriggerRef}
+                      type="button"
+                      onFocus={() => setOpenMenu(dropdownKey)}
+                      onClick={() =>
+                        setOpenMenu((value) => (value === dropdownKey ? null : dropdownKey))
+                      }
+                      className={cn(
+                        'inline-flex items-center gap-1 rounded-md px-2.5 py-2 text-[13px] font-semibold transition hover:bg-white/8 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                        active || menuOpen ? 'bg-white/8 text-gold' : 'text-burgundy-foreground/90',
+                      )}
+                      aria-haspopup="true"
+                      aria-expanded={menuOpen}
+                      aria-controls={menuId}
+                    >
+                      {t(link.label, link.labelEn)}
+                      <ChevronDown
+                        className={cn(
+                          'size-3.5 text-gold transition-transform duration-200',
+                          menuOpen && 'rotate-180',
+                        )}
+                        aria-hidden="true"
+                      />
+                    </button>
+                    {dropdownKey === 'services' ? (
+                      <ServicesMegaMenu
+                        id={menuId}
+                        groups={serviceMenuGroups}
+                        open={menuOpen}
+                        onNavigate={() => setOpenMenu(null)}
+                      />
+                    ) : (
+                      <LegalKnowledgeDropdown
+                        id={menuId}
+                        groups={legalKnowledgeMenuGroups}
+                        open={menuOpen}
+                        onNavigate={() => setOpenMenu(null)}
+                      />
+                    )}
+                  </div>
+                )
+              }
+
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={localizedHref}
+                  onMouseEnter={() => setOpenMenu(null)}
+                  onFocus={() => setOpenMenu(null)}
                   className={cn(
-                    'rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-gold',
-                    active
-                      ? 'text-gold'
-                      : 'text-burgundy-foreground/90',
+                    'rounded-md px-2.5 py-2 text-[13px] font-semibold transition hover:bg-white/8 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                    active ? 'bg-white/8 text-gold' : 'text-burgundy-foreground/90',
                   )}
                 >
-                  {link.label}
+                  {t(link.label, link.labelEn)}
                 </Link>
               )
             })}
+            <Link
+              href={getLocalePath('/search', locale)}
+              aria-label={t('ค้นหา', 'Search')}
+              className="ml-1 flex size-9 items-center justify-center rounded-md text-gold transition hover:bg-white/8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            >
+              <Search className="size-4" aria-hidden="true" />
+            </Link>
           </nav>
+        </Container>
+      </div>
 
-          <div className="flex items-center gap-2">
-            <a
-              href={`tel:${siteConfig.phones[0].replace(/-/g, '')}`}
-              className="hidden items-center gap-1.5 rounded-md bg-gold px-3 py-2 text-sm font-semibold text-burgundy-dark transition-colors hover:bg-gold-soft sm:flex"
-            >
-              <Phone className="size-4" aria-hidden="true" />
-              โทรปรึกษา
-            </a>
-            <a
-              href={`https://line.me/R/ti/p/~${siteConfig.line}`}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden items-center gap-1.5 rounded-md border border-gold/60 px-3 py-2 text-sm font-semibold text-gold transition-colors hover:bg-burgundy-dark sm:flex"
-            >
-              <MessageCircle className="size-4" aria-hidden="true" />
-              LINE
-            </a>
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="flex size-10 items-center justify-center rounded-md border border-gold/40 text-gold lg:hidden"
-              aria-label={open ? 'ปิดเมนู' : 'เปิดเมนู'}
-              aria-expanded={open}
-            >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
-            </button>
-            {/* auth actions */}
-            <div className="hidden lg:flex lg:items-center lg:gap-2">
-              {user ? (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm">{user.name}</span>
-                  <button onClick={logout} className="rounded border px-3 py-1 text-sm">ออกจากระบบ</button>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Link href="/login" className="text-sm underline">เข้าสู่ระบบ</Link>
-                  <Link href="/register/customer" className="text-sm underline">สมัคร</Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+      {mobileOpen && (
+        <div
+          id="mobile-navigation"
+          className="max-h-[calc(100vh-8.5rem)] overflow-y-auto border-t border-gold/20 bg-burgundy-dark text-burgundy-foreground lg:hidden"
+        >
+          <Container className="py-3">
+            <nav aria-label={t('เมนูมือถือ', 'Mobile Menu')}>
+              {headerNavigation.map((link) => {
+                const localizedHref = getLocalePath(link.href, locale)
+                const active = isActiveRoute(pathname, localizedHref)
 
-        {/* Mobile menu */}
-        {open && (
-          <div className="border-t border-gold/30 bg-burgundy-dark lg:hidden">
-            <nav
-              className="mx-auto flex max-w-6xl flex-col px-4 py-2"
-              aria-label="เมนูมือถือ"
-            >
-              {navLinks.map((link) => {
-                const active =
-                  link.href === '/'
-                    ? pathname === '/'
-                    : pathname.startsWith(link.href)
+                if (link.href === '/services') {
+                  return (
+                    <MobileNavigationAccordion
+                      key={link.href}
+                      id="mobile-services-menu"
+                      label={t(link.label, link.labelEn)}
+                      href={localizedHref}
+                      groups={serviceMenuGroups}
+                      active={active}
+                      onNavigate={closeNavigation}
+                    />
+                  )
+                }
+
+                if (link.href === '/legal-knowledge') {
+                  return (
+                    <MobileNavigationAccordion
+                      key={link.href}
+                      id="mobile-knowledge-menu"
+                      label={t(link.label, link.labelEn)}
+                      href={localizedHref}
+                      groups={legalKnowledgeMenuGroups}
+                      active={active}
+                      onNavigate={closeNavigation}
+                    />
+                  )
+                }
+
                 return (
                   <Link
                     key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
+                    href={localizedHref}
+                    onClick={closeNavigation}
                     className={cn(
-                      'rounded-md px-3 py-2.5 text-sm font-medium transition-colors',
-                      active
-                        ? 'text-gold'
-                        : 'text-burgundy-foreground/90 hover:text-gold',
+                      'block border-b border-white/10 px-3 py-3 text-sm font-semibold transition hover:bg-white/5 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold',
+                      active ? 'text-gold' : 'text-burgundy-foreground/90',
                     )}
                   >
-                    {link.label}
+                    {t(link.label, link.labelEn)}
                   </Link>
                 )
               })}
-              <div className="mt-2 flex gap-2 border-t border-gold/20 pt-3">
-                <a
-                  href={`tel:${siteConfig.phones[0].replace(/-/g, '')}`}
-                  className="flex flex-1 items-center justify-center gap-1.5 rounded-md bg-gold px-3 py-2.5 text-sm font-semibold text-burgundy-dark"
-                >
-                  <Phone className="size-4" aria-hidden="true" />
-                  โทร
-                </a>
-                <a
-                  href={`https://line.me/R/ti/p/~${siteConfig.line}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-1 items-center justify-center gap-1.5 rounded-md border border-gold/60 px-3 py-2.5 text-sm font-semibold text-gold"
-                >
-                  <MessageCircle className="size-4" aria-hidden="true" />
-                  LINE
-                </a>
-                <a
-                  href={siteConfig.mapUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-1 items-center justify-center gap-1.5 rounded-md border border-gold/60 px-3 py-2.5 text-sm font-semibold text-gold"
-                >
-                  แผนที่
-                </a>
-              </div>
-              <div className="mt-3 flex items-center justify-end gap-3">
-                {user ? (
-                  <>
-                    <span className="text-sm">{user.name}</span>
-                    <button onClick={logout} className="rounded border px-3 py-1 text-sm">ออกจากระบบ</button>
-                  </>
-                ) : (
-                  <div className="flex gap-2">
-                    <Link href="/login" className="text-sm underline">เข้าสู่ระบบ</Link>
-                    <Link href="/register/customer" className="text-sm underline">สมัคร</Link>
-                  </div>
-                )}
-              </div>
+              <Link
+                href={getLocalePath(navigationCta.href, locale)}
+                onClick={closeNavigation}
+                className="mt-4 block rounded-lg bg-gold px-4 py-3 text-center text-sm font-bold text-burgundy-dark transition hover:bg-gold-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                {t(navigationCta.label, navigationCta.labelEn)}
+              </Link>
             </nav>
-          </div>
-        )}
-      </header>
-    </>
+          </Container>
+        </div>
+      )}
+    </header>
   )
 }

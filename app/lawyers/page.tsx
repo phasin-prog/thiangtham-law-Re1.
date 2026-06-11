@@ -1,85 +1,48 @@
-import Image from 'next/image'
-import { SectionHeading } from '@/components/section-heading'
+import { Container } from '@/components/container'
+import { CTASection } from '@/components/cta-section'
+import { PageHero } from '@/components/page-hero'
+import { PersonCard } from '@/components/person-card'
 import { lawyers } from '@/lib/site-data'
 
 export default function LawyersPage() {
   return (
     <main>
-      <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <SectionHeading
-            align="center"
-            eyebrow="ทีมกฎหมาย"
-            title="ทนายความของเรา"
-            description="ทนายความมีประสบการณ์ด้านคดีแพ่ง คดีอาญา และอื่น ๆ พร้อมให้บริการด้วยความเที่ยงธรรม"
-          />
-
-          <div className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {lawyers.map((lawyer) => (
-              <div key={lawyer.name} className="overflow-hidden rounded-3xl border border-border bg-card transition-all hover:shadow-lg">
-                <div className="relative h-80 w-full bg-muted">
-                  {lawyer.image && (
-                    <Image
-                      src={lawyer.image}
-                      alt={lawyer.name}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-
-                <div className="space-y-4 p-7">
-                  <div>
-                    <h3 className="font-serif text-xl font-bold text-burgundy">
-                      {lawyer.name}
-                    </h3>
-                    <p className="text-sm font-semibold text-gold">{lawyer.role}</p>
-                    {lawyer.license && (
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {lawyer.license}
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-semibold text-burgundy/80">
-                      ความเชี่ยวชาญ
-                    </p>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {lawyer.expertise.map((skill) => (
-                        <span
-                          key={skill}
-                          className="inline-block rounded-full bg-burgundy/10 px-3 py-1 text-xs text-burgundy"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-semibold text-burgundy/80">
-                      ประสบการณ์
-                    </p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {lawyer.experience}
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs font-semibold text-burgundy/80">
-                      บรรยาย
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      {lawyer.bio}
-                    </p>
-                  </div>
-                </div>
-              </div>
+      <PageHero
+        title="ทนายความ"
+        description="ทีมทนายความของสำนักงานให้คำปรึกษา วางแนวทาง และดำเนินคดีโดยพิจารณาจากข้อเท็จจริง พยานหลักฐาน และกฎหมายที่เกี่ยวข้อง"
+        crumbs={[{ href: '/', label: 'หน้าแรก' }, { label: 'ทนายความ' }]}
+      />
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="mb-10 max-w-3xl">
+            <p className="text-sm font-semibold tracking-wide text-gold">ทีมกฎหมาย</p>
+            <h2 className="mt-2 font-serif text-2xl font-bold text-primary md:text-3xl">
+              ดูแลแต่ละเรื่องด้วยความรอบคอบและตรงไปตรงมา
+            </h2>
+            <p className="mt-3 leading-7 text-muted-foreground">
+              ข้อมูลประวัติและเลขใบอนุญาตที่ยังไม่ได้รับการยืนยันจะแสดงเป็นข้อมูลรอระบุ
+              เพื่อหลีกเลี่ยงการเผยแพร่ข้อมูลที่คลาดเคลื่อน
+            </p>
+          </div>
+          <div
+            className={
+              lawyers.length === 1
+                ? 'max-w-4xl'
+                : 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3'
+            }
+          >
+            {lawyers.map((lawyer, index) => (
+              <PersonCard
+                key={`${lawyer.name}-${index}`}
+                person={lawyer}
+                variant="lawyer"
+                featured={lawyers.length === 1}
+              />
             ))}
           </div>
-        </div>
+        </Container>
       </section>
+      <CTASection title="ต้องการปรึกษาทนายความเกี่ยวกับเรื่องของคุณ?" />
     </main>
   )
 }

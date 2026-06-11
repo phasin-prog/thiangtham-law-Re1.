@@ -1,26 +1,28 @@
-import { SectionHeading } from '@/components/section-heading'
+import { Container } from '@/components/container'
+import { CTASection } from '@/components/cta-section'
+import { PageHero } from '@/components/page-hero'
 import { ServiceCard } from '@/components/service-card'
-import { services } from '@/lib/site-data'
+import { legalServices } from '@/lib/data/services'
 
 export default function ServicesPage() {
   return (
     <main>
-      <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
-          <SectionHeading
-            align="center"
-            eyebrow="บริการทางกฎหมาย"
-            title="บริการกฎหมายของเรา"
-            description="เราให้บริการด้านคดีและเอกสารทางกฎหมายอย่างรอบคอบ ทั้งคดีแพ่ง คดีอาญา คดีครอบครัว และอีกหลายด้าน"
-          />
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard key={service.slug} service={service} />
-            ))}
+      <PageHero
+        title="บริการกฎหมาย"
+        description="บริการให้คำปรึกษา ตรวจเอกสาร เจรจา และดำเนินคดี โดยพิจารณาจากข้อเท็จจริงและพยานหลักฐานของแต่ละกรณี"
+        crumbs={[{ href: '/', label: 'หน้าแรก' }, { label: 'บริการกฎหมาย' }]}
+      />
+      <section className="py-14 md:py-20">
+        <Container>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {legalServices.map((service) => <ServiceCard key={service.slug} service={service} />)}
           </div>
-        </div>
+        </Container>
       </section>
+      <CTASection
+        title="ไม่แน่ใจว่าปัญหาอยู่ในบริการหมวดใด?"
+        description="ส่งรายละเอียดเบื้องต้นได้ ทีมงานจะช่วยจัดประเภทเรื่องและแจ้งข้อมูลที่ควรเตรียมสำหรับการปรึกษา"
+      />
     </main>
   )
 }

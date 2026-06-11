@@ -1,0 +1,6 @@
+memory allocation of 19883466memory allocation of  bytes failed
+5265254memory allocation of 67108864 bytes failed
+skipping backtrace printing to avoid potential recursion
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+ bytes failed
+skipping backtrace printing to avoid potential recursion

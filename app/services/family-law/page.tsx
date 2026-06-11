@@ -1,12 +1,5 @@
-import { ServiceDetail } from '@/components/service-detail'
-import { services } from '@/lib/site-data'
+import { redirect } from 'next/navigation'
 
-export default function FamilyLawPage() {
-  const service = services.find((item) => item.slug === 'family-law')
-
-  if (!service) {
-    throw new Error('Service "family-law" not found')
-  }
-
-  return <ServiceDetail service={service} />
+export default function FamilyLawAliasPage() {
+  redirect('/services/family')
 }

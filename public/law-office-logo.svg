@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">สำนักกฎหมายเที่ยงธรรมทนายความ</title>
+  <desc id="desc">ตราสัญลักษณ์ตาชั่งแห่งความยุติธรรมสีทองบนพื้นสีน้ำเงิน</desc>
+  <rect width="96" height="96" rx="20" fill="#172943"/>
+  <path d="M48 17v57M29 29h38M48 22c-7 4-14 7-23 7M48 22c7 4 14 7 23 7" fill="none" stroke="#d5b457" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m29 32-11 22h22L29 32Zm38 0L56 54h22L67 32Z" fill="none" stroke="#f3dfa0" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M17 54c1 8 6 12 12 12s11-4 12-12M55 54c1 8 6 12 12 12s11-4 12-12M33 78h30M39 70h18" fill="none" stroke="#d5b457" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,28 +1,51 @@
-export const team = [
+export const teamMembers = [
   {
-    name: 'ทีมประสานงานคดี',
-    role: 'ฝ่ายประสานงาน',
-    duty: 'ประสานงานระหว่างลูกความ ทนาย และหน่วยงานที่เกี่ยวข้อง',
-    image: '/office-team-coordination-desk.jpg',
+    name: 'นายเกษม ฉิมพลี',
+    role: 'หัวหน้าสำนักงาน',
+    experience: 'ประสบการณ์เป็นทนายความมากกว่า 19 ปี',
+    description:
+      'หัวหน้าสำนักงานสำนักกฎหมายเที่ยงธรรมทนายความ มีประสบการณ์ในการให้คำปรึกษา รับว่าความ และวางแนวทางคดีมากกว่า 19 ปี โดยให้ความสำคัญกับการวิเคราะห์ข้อเท็จจริง การเตรียมพยานหลักฐาน และการอธิบายทางเลือกทางกฎหมายแก่ลูกความอย่างเป็นระบบ',
+    image: '/person-placeholder.svg',
+  },
+] as const
+
+export const teamRoles = [
+  {
+    title: 'ทีมทนายความ',
+    description:
+      'ทีมงานทนายความมากกว่า 9 คน พร้อมให้คำปรึกษา รับว่าความ และดำเนินคดีในหลากหลายประเภท',
   },
   {
-    name: 'ทีมเอกสาร',
-    role: 'ฝ่ายเอกสาร',
-    duty: 'จัดเตรียมและตรวจสอบความครบถ้วนของเอกสารคดี',
-    image: '/office-documents-legal-files.jpg',
+    title: 'ที่ปรึกษากฎหมาย',
+    description:
+      'ให้คำปรึกษาด้านข้อกฎหมาย เอกสาร สัญญา และแนวทางดำเนินคดี',
   },
   {
-    name: 'ทีมติดต่อสำนักงาน',
-    role: 'ฝ่ายต้อนรับและติดต่อ',
-    duty: 'รับเรื่องและให้ข้อมูลเบื้องต้นแก่ผู้ติดต่อ',
-    image: '/office-reception-desk-warm.jpg',
+    title: 'ทีมประสานงานคดี',
+    description:
+      'ดูแลการนัดหมาย เอกสาร การติดตามขั้นตอน และการประสานงานกับลูกความ',
   },
   {
-    name: 'ทีมติดตามนัดหมาย',
-    role: 'ฝ่ายนัดหมาย',
-    duty: 'ดูแลตารางนัดหมายและแจ้งเตือนกำหนดการสำคัญ',
-    image: '/office-scheduling-calendar-desk.jpg',
+    title: 'ทีมเอกสารและข้อมูลคดี',
+    description:
+      'ช่วยจัดเตรียม รวบรวม และตรวจสอบเอกสารที่เกี่ยวข้องกับการดำเนินคดี',
   },
-]
+] as const
+
+export const teamValues = [
+  'รอบคอบ',
+  'ชัดเจน',
+  'รักษาความลับ',
+  'อธิบายขั้นตอนให้เข้าใจ',
+  'วางแนวทางคดีตามข้อเท็จจริงและข้อกฎหมาย',
+] as const
+
+// Legacy shape retained for existing pages that still consume team from site-data.
+export const team = teamRoles.map((role) => ({
+  name: role.title,
+  role: role.title,
+  duty: role.description,
+  image: '/team-placeholder.svg',
+}))
 
 export default team

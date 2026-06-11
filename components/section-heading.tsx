@@ -27,7 +27,7 @@ export function SectionHeading({
         <p
           className={cn(
             'text-sm font-semibold uppercase tracking-wider',
-            light ? 'text-gold' : 'text-burgundy',
+            light ? 'text-gold' : 'text-primary',
           )}
         >
           {eyebrow}
@@ -36,7 +36,7 @@ export function SectionHeading({
       <h2
         className={cn(
           'mt-2 text-balance font-serif text-2xl font-bold md:text-3xl',
-          light ? 'text-gold' : 'text-burgundy',
+          light ? 'text-gold' : 'text-primary',
         )}
       >
         {title}
@@ -52,7 +52,7 @@ export function SectionHeading({
         <p
           className={cn(
             'mt-4 text-pretty leading-relaxed',
-            light ? 'text-burgundy-foreground/85' : 'text-muted-foreground',
+            light ? 'text-primary-foreground/85' : 'text-muted-foreground',
           )}
         >
           {description}

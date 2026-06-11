@@ -1,36 +1,30 @@
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import { Noto_Sans_Thai, Noto_Serif_Thai, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { FloatingContactButton } from '@/components/floating-contact-button'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
-
-const notoThai = Noto_Sans_Thai({
-  variable: '--font-noto-thai',
-  subsets: ['thai', 'latin'],
-  weight: ['400', '500', '600', '700'],
-})
-
-const notoSerifThai = Noto_Serif_Thai({
-  variable: '--font-noto-serif-thai',
-  subsets: ['thai', 'latin'],
-  weight: ['500', '600', '700'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import { DocumentLocale } from '@/components/document-locale'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://thiangtham-law.example.com'),
   title: {
-    default: 'สำนักกฎหมายเที่ยงธรรมทนายความ | ทนายเดชอุดม อุบลราชธานี',
+    default: 'สำนักกฎหมายเที่ยงธรรมทนายความ | ปรึกษากฎหมายและรับว่าความ',
     template: '%s | สำนักกฎหมายเที่ยงธรรมทนายความ',
   },
   description:
-    'ให้คำปรึกษา ว่าความ และดูแลคดีแพ่ง คดีอาญา คดีครอบครัว คดีมรดก คดีหนี้ และสัญญา โดยสำนักกฎหมายเที่ยงธรรมทนายความ อำเภอเดชอุดม จังหวัดอุบลราชธานี',
+    'สำนักกฎหมายเที่ยงธรรมทนายความ ก่อตั้งเมื่อปี พ.ศ. 2550 นำโดยนายเกษม ฉิมพลี ให้คำปรึกษากฎหมาย รับว่าความ และดำเนินคดี พร้อมทีมทนายมากกว่า 9 คน',
   keywords: [
+    'สำนักกฎหมาย',
+    'ทนายความ',
+    'ปรึกษากฎหมาย',
+    'รับว่าความ',
+    'คดีแพ่ง',
+    'คดีอาญา',
+    'คดีครอบครัว',
+    'คดีมรดก',
+    'คดีที่ดิน',
+    'ทนายความไทย',
     'สำนักกฎหมายเที่ยงธรรมทนายความ',
     'เที่ยงธรรมทนายความ',
     'ทนายเดชอุดม',
@@ -42,11 +36,10 @@ export const metadata: Metadata = {
     'ทนายคดีมรดกอุบลราชธานี',
     'ทนายคดีครอบครัวอุบลราชธานี',
   ],
-  generator: 'v0.app',
   openGraph: {
-    title: 'สำนักกฎหมายเที่ยงธรรมทนายความ | ทนายเดชอุดม อุบลราชธานี',
+    title: 'สำนักกฎหมายเที่ยงธรรมทนายความ | ปรึกษากฎหมายและรับว่าความ',
     description:
-      'ให้คำปรึกษา ว่าความ และดูแลคดีด้วยความรอบคอบ ตรงไปตรงมา และเป็นธรรม',
+      'ก่อตั้งเมื่อปี พ.ศ. 2550 นำโดยนายเกษม ฉิมพลี พร้อมทีมทนายความมากกว่า 9 คน',
     locale: 'th_TH',
     type: 'website',
   },
@@ -58,14 +51,21 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="th"
-      className={`${notoThai.variable} ${notoSerifThai.variable} ${geistMono.variable} bg-background`}
-    >
-      <body className="font-sans antialiased">
+    <html lang="th" className="bg-background" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.lang=location.pathname==='/en'||location.pathname.startsWith('/en/')?'en':'th'",
+          }}
+        />
+      </head>
+      <body className="pb-16 font-sans antialiased lg:pb-0">
+        <DocumentLocale />
         <SiteHeader />
         {children}
         <SiteFooter />
+        <FloatingContactButton />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

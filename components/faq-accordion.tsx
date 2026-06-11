@@ -26,7 +26,7 @@ export function FAQAccordion({
               <span className="font-medium text-card-foreground">{item.q}</span>
               <ChevronDown
                 className={cn(
-                  'size-5 shrink-0 text-burgundy transition-transform',
+                  'size-5 shrink-0 text-primary transition-transform',
                   open && 'rotate-180',
                 )}
                 aria-hidden="true"

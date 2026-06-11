@@ -1,3 +1,5 @@
+import { officeContact } from './data/office'
+
 export const siteConfig = {
   name: 'สำนักกฎหมายเที่ยงธรรมทนายความ',
   nameEn: 'Thiangtham Law Office',
@@ -5,13 +7,7 @@ export const siteConfig = {
     'ให้คำปรึกษา ว่าความ และดูแลคดีด้วยความรอบคอบ ตรงไปตรงมา และเป็นธรรม',
   taglineAlt:
     'บริการกฎหมายด้วยความเที่ยงธรรม รอบคอบ และยึดประโยชน์ของลูกความเป็นสำคัญ',
-  phones: ['082-377-2404', '081-538-2404'],
-  line: 'Kasemchimphlee',
-  facebook: 'สำนักกฎหมายเที่ยงธรรมทนายความ',
-  email: 'Kasemchimphlee1005@gmail.com',
-  mapUrl: 'https://share.google/jda5PoaTJYdArR9II',
-  address: '1005 หมู่ 24 ตำบลเมืองเดช อำเภอเดชอุดม จังหวัดอุบลราชธานี 34160',
-  hours: 'จันทร์ – เสาร์ เวลา 08.30 – 17.30 น. (นัดหมายล่วงหน้าได้)',
+  ...officeContact,
 }
 
 export const navLinks = [
@@ -377,16 +373,17 @@ export const services: Service[] = [
 export type Person = {
   name: string
   role: string
-  license?: string
-  expertise: string[]
-  experience: string
-  bio: string
-  image: string
+  licenseNumber?: string
+  expertise?: string[]
+  experience?: string
+  bio?: string
+  workHistory?: string
+  image?: string
 }
 
 import { lawyers as _lawyers } from './data/lawyers'
 import { advisors as _advisors } from './data/advisors'
-import { team as _team } from './data/team'
+import { team as _team } from './data/staff'
 
 export const lawyers = _lawyers
 export const advisors = _advisors

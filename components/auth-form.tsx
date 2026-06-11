@@ -30,7 +30,12 @@ export function LoginForm() {
     try {
       const res = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
       const j = await res.json()
-      if (j.ok) { setStatus('✓ เข้าสู่ระบบสำเร็จ'); setTimeout(() => location.href = '/admin', 600) } else setStatus('✗ ' + (j.error || 'ไม่สำเร็จ'))
+      if (j.ok) {
+        setStatus('✓ เข้าสู่ระบบสำเร็จ')
+        setTimeout(() => {
+          location.href = j.user?.role === 'staff' ? '/admin' : '/'
+        }, 600)
+      } else setStatus('✗ ' + (j.error || 'ไม่สำเร็จ'))
     } catch (err) { setStatus('✗ เกิดข้อผิดพลาด') }
     setLoading(false)
   }
