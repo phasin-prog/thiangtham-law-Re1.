@@ -1,30 +1,48 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { getSupabaseAdmin } from '@/lib/supabase'
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const { filename, content } = body as { filename: string; content: string }
-
-    if (!filename || !content) {
+    const body: unknown = await req.json()
+    if (!body || typeof body !== 'object') {
       return NextResponse.json({ error: 'Missing filename or content' }, { status: 400 })
     }
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads')
-    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
+    const { filename, content } = body as { filename?: unknown; content?: unknown }
+    if (typeof filename !== 'string' || typeof content !== 'string') {
+      return NextResponse.json({ error: 'Missing filename or content' }, { status: 400 })
+    }
 
-    // content may be a data URL or raw base64
-    let base64 = content
-    const match = content.match(/data:.*;base64,(.*)/)
-    if (match) base64 = match[1]
+    const dataUrlMatch = content.match(/^data:(image\/(?:png|jpeg|webp|gif));base64,(.+)$/)
+    if (!dataUrlMatch) {
+      return NextResponse.json({ error: 'Unsupported image format' }, { status: 400 })
+    }
 
-    const filePath = path.join(uploadsDir, filename)
-    fs.writeFileSync(filePath, Buffer.from(base64, 'base64'))
+    const safeFilename = filename.replace(/[^a-zA-Z0-9._-]/g, '_')
+    const [, contentType, base64] = dataUrlMatch
+    const buffer = Buffer.from(base64, 'base64')
+    if (buffer.byteLength > 5 * 1024 * 1024) {
+      return NextResponse.json({ error: 'Image exceeds 5 MB' }, { status: 413 })
+    }
 
-    const publicUrl = `/uploads/${filename}`
+    const supabase = getSupabaseAdmin()
+
+    const { error } = await supabase.storage
+      .from('uploads')
+      .upload(safeFilename, buffer, {
+        contentType,
+        upsert: true,
+      })
+
+    if (error) throw error
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('uploads')
+      .getPublicUrl(safeFilename)
+
     return NextResponse.json({ ok: true, url: publicUrl })
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

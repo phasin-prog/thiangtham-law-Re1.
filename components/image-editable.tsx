@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 type Props = {
   storageKey: string
@@ -10,25 +10,24 @@ type Props = {
 }
 
 export default function ImageEditable({ storageKey, defaultSrc, alt, className }: Props) {
-  const [src, setSrc] = useState<string | undefined>(defaultSrc)
+  const [src, setSrc] = useState<string | undefined>(() => {
+    if (typeof window === 'undefined') return defaultSrc
+
+    try {
+      return localStorage.getItem(storageKey) || defaultSrc
+    } catch {
+      return defaultSrc
+    }
+  })
   const [editing, setEditing] = useState(false)
   const [input, setInput] = useState('')
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(storageKey)
-      if (saved) setSrc(saved)
-    } catch (e) {
-      // ignore
-    }
-  }, [storageKey])
 
   function save() {
     try {
       localStorage.setItem(storageKey, input)
       setSrc(input)
       setEditing(false)
-    } catch (e) {}
+    } catch {}
   }
 
   function reset() {
@@ -36,11 +35,13 @@ export default function ImageEditable({ storageKey, defaultSrc, alt, className }
       localStorage.removeItem(storageKey)
       setSrc(defaultSrc)
       setEditing(false)
-    } catch (e) {}
+    } catch {}
   }
 
   return (
     <div className={`relative ${className ?? ''}`}>
+      {/* The source is user-provided at runtime, so Next Image cannot validate its host. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="w-full h-full object-cover" />
 
       <button

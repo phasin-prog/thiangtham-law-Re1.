@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react'
 
-type Collections = 'lawyers' | 'advisors' | 'team'
+type Collections = 'lawyers' | 'advisors' | 'staff' | 'services' | 'articles'
+type AdminData = Partial<Record<Collections, unknown[]>>
 
 export default function AdminPage() {
-  const [data, setData] = useState<Record<string, any> | null>(null)
+  const [data, setData] = useState<AdminData | null>(null)
   const [editing, setEditing] = useState<Collections>('lawyers')
   const [text, setText] = useState('')
   const [status, setStatus] = useState('')
@@ -13,15 +14,16 @@ export default function AdminPage() {
   useEffect(() => {
     fetch('/api/admin/read')
       .then((r) => r.json())
-      .then((j) => {
-        setData(j)
-        setText(JSON.stringify(j[editing], null, 2))
+      .then((result: AdminData) => {
+        setData(result)
+        setText(JSON.stringify(result.lawyers ?? [], null, 2))
       })
   }, [])
 
-  useEffect(() => {
-    if (data) setText(JSON.stringify((data as any)[editing], null, 2))
-  }, [editing, data])
+  function selectCollection(collection: Collections) {
+    setEditing(collection)
+    setText(JSON.stringify(data?.[collection] ?? [], null, 2))
+  }
 
   async function save() {
     try {
@@ -35,8 +37,9 @@ export default function AdminPage() {
       const j = await res.json()
       if (j.ok) setStatus('Saved')
       else setStatus('Error: ' + (j.error || 'unknown'))
-    } catch (e: any) {
-      setStatus('JSON parse error: ' + e.message)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error'
+      setStatus('JSON parse error: ' + message)
     }
   }
 
@@ -76,10 +79,12 @@ export default function AdminPage() {
     <div className="p-8">
       <h1 className="mb-4 text-2xl font-bold">Admin — Edit Data</h1>
 
-      <div className="mb-4 flex gap-2">
-        <button onClick={() => setEditing('lawyers')} className={`px-3 py-1 ${editing === 'lawyers' ? 'bg-primary text-white' : 'border'}`}>Lawyers</button>
-        <button onClick={() => setEditing('advisors')} className={`px-3 py-1 ${editing === 'advisors' ? 'bg-primary text-white' : 'border'}`}>Advisors</button>
-        <button onClick={() => setEditing('team')} className={`px-3 py-1 ${editing === 'team' ? 'bg-primary text-white' : 'border'}`}>Team</button>
+      <div className="mb-4 flex flex-wrap gap-2">
+        <button onClick={() => selectCollection('lawyers')} className={`px-3 py-1 ${editing === 'lawyers' ? 'bg-primary text-white' : 'border'}`}>Lawyers</button>
+        <button onClick={() => selectCollection('advisors')} className={`px-3 py-1 ${editing === 'advisors' ? 'bg-primary text-white' : 'border'}`}>Advisors</button>
+        <button onClick={() => selectCollection('staff')} className={`px-3 py-1 ${editing === 'staff' ? 'bg-primary text-white' : 'border'}`}>Staff</button>
+        <button onClick={() => selectCollection('services')} className={`px-3 py-1 ${editing === 'services' ? 'bg-primary text-white' : 'border'}`}>Services</button>
+        <button onClick={() => selectCollection('articles')} className={`px-3 py-1 ${editing === 'articles' ? 'bg-primary text-white' : 'border'}`}>Articles</button>
       </div>
 
       <div className="mb-4 flex gap-2">
