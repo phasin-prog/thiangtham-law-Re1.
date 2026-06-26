@@ -81,6 +81,20 @@ export function SiteFooter() {
                 </Link>
               </li>
             ))}
+            {locale === 'th' && (
+              <>
+                <li>
+                  <Link href="/th/lawyer-det-udom" className="text-primary-foreground/60 transition-colors hover:text-gold font-medium text-gold/90">
+                    ทนายความเดชอุดม
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/th/lawyer-ubon-ratchathani" className="text-primary-foreground/60 transition-colors hover:text-gold font-medium text-gold/90">
+                    ทนายความอุบลราชธานี
+                  </Link>
+                </li>
+              </>
+            )}
             <li>
               <Link href={getLocalePath('/team', locale)} className="text-primary-foreground/60 transition-colors hover:text-gold">
                 {t('ทนายความ และทีมงาน', 'Lawyers & Team')}
