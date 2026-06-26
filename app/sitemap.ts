@@ -10,6 +10,7 @@ const thRoutes = [
 
   // Local SEO pages
   '/th/lawyer-det-udom',
+  '/th/lawyer-ubon-ratchathani',
 
   '/th/lawyers',
   '/th/articles',

@@ -10,12 +10,12 @@ import { isLocale, localeCookieName } from '@/lib/i18n-config'
 import { officeContact, officeInfo } from '@/lib/data/office'
 
 const description =
-  'ทนายเดชอุดม ทนายอุบลราชธานี สำนักกฎหมายเที่ยงธรรมทนายความ ให้คำปรึกษากฎหมาย รับว่าความคดีแพ่ง อาญา ครอบครัว มรดก ที่ดิน และอรรถคดีทั่วราชอาณาจักร'
+  'สำนักกฎหมายเที่ยงธรรมทนายความ ตั้งอยู่ที่อำเภอเดชอุดม จังหวัดอุบลราชธานี ให้บริการปรึกษากฎหมาย ดำเนินคดี และรับว่าความทั่วราชอาณาจักร โดยดูแลคดีแพ่ง คดีอาญา คดีครอบครัว มรดก ที่ดิน และข้อพิพาททั่วไป'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.thiangthamlaw.com'),
   title: {
-    default: 'ทนายเดชอุดม | ทนายอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ',
+    default: 'ทนายความเดชอุดม และทนายความอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ',
     template: '%s | สำนักกฎหมายเที่ยงธรรมทนายความ',
   },
   description,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     'เที่ยงธรรมทนายความ',
   ],
   openGraph: {
-    title: 'ทนายเดชอุดม | ทนายอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ',
+    title: 'ทนายความเดชอุดม และทนายความอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ',
     description,
     url: 'https://www.thiangthamlaw.com/th',
     siteName: 'สำนักกฎหมายเที่ยงธรรมทนายความ',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ทนายเดชอุดม | ทนายอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ',
+    title: 'ทนายความเดชอุดม และทนายความอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ',
     description,
     images: ['/law-office-hero.png'],
   },

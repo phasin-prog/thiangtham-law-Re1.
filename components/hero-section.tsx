@@ -42,15 +42,15 @@ export function HeroSection() {
 
             <h1 className="mt-8 text-balance font-serif text-4xl font-bold leading-[1.08] text-white sm:text-5xl lg:text-6xl">
               {t(
-                'ทนายเดชอุดม ทนายอุบลราชธานี สำนักกฎหมายเที่ยงธรรมทนายความ',
-                'Det Udom Lawyer & Ubon Ratchathani Law Firm | Tiangtham Law Office',
+                'ทนายความเดชอุดม และทนายความอุบลราชธานี',
+                'Legal Services in Det Udom & Ubon Ratchathani | Tiangtham Law Office',
               )}
             </h1>
 
             <p className="mt-6 max-w-2xl text-pretty text-lg leading-8 text-primary-foreground/80 sm:text-xl">
               {t(
-                'สำนักกฎหมายเที่ยงธรรมทนายความ ให้บริการปรึกษากฎหมาย รับว่าความ และดำเนินคดีในพื้นที่เดชอุดม อุบลราชธานี รวมถึงรับว่าความอรรถคดีทั่วราชอาณาจักร ด้วยความรอบคอบและใส่ใจในข้อเท็จจริง',
-                'Tiangtham Law Office provides legal counsel, litigation, and representation in Det Udom, Ubon Ratchathani, and nationwide, ensuring confidentiality and integrity.',
+                'สำนักกฎหมายเที่ยงธรรมทนายความ ตั้งอยู่ที่อำเภอเดชอุดม จังหวัดอุบลราชธานี ให้บริการปรึกษากฎหมาย ดำเนินคดี และรับว่าความทั่วราชอาณาจักร สำหรับผู้ที่ต้องการทนายความในพื้นที่เดชอุดม อุบลราชธานี และพื้นที่ใกล้เคียง',
+                'Tiangtham Law Office is located in Det Udom, Ubon Ratchathani. We provide legal consultation, litigation, and representation nationwide for clients seeking local lawyers.',
               )}
             </p>
 

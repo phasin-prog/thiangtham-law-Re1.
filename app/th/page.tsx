@@ -134,6 +134,79 @@ export default function HomePage() {
     <main className="overflow-x-hidden selection:bg-gold/30">
       <HeroSection />
 
+      <section className="bg-secondary/15 py-16 md:py-20 border-b border-border">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+            <div>
+              <SectionHeading
+                eyebrow="Local Legal Counsel"
+                title="ทนายความในเดชอุดม อุบลราชธานี"
+                description="สำนักงานกฎหมายเที่ยงธรรมทนายความตั้งอยู่ในอำเภอเดชอุดม จังหวัดอุบลราชธานี ให้บริการปรึกษากฎหมาย ตรวจข้อเท็จจริง ประเมินแนวทางคดี และดำเนินคดีตามขั้นตอนของกฎหมาย สำหรับประชาชนในพื้นที่เดชอุดม อุบลราชธานี และพื้นที่ใกล้เคียง พร้อมทั้งรับว่าความทั่วราชอาณาจักรตามขอบเขตวิชาชีพทนายความ"
+              />
+              <div className="mt-8 flex flex-wrap gap-4 text-sm font-semibold">
+                <Link
+                  href="/th/lawyer-det-udom"
+                  className="inline-flex items-center gap-1.5 text-primary hover:text-gold transition-colors"
+                >
+                  <MapPin className="size-4 text-gold" aria-hidden="true" />
+                  ทนายความเดชอุดม
+                </Link>
+                <span className="text-muted-foreground/30">|</span>
+                <Link
+                  href="/th/lawyer-ubon-ratchathani"
+                  className="inline-flex items-center gap-1.5 text-primary hover:text-gold transition-colors"
+                >
+                  <MapPin className="size-4 text-gold" aria-hidden="true" />
+                  ทนายความอุบลราชธานี
+                </Link>
+                <span className="text-muted-foreground/30">|</span>
+                <Link
+                  href="/th/services"
+                  className="inline-flex items-center gap-1.5 text-primary hover:text-gold transition-colors"
+                >
+                  <Scale className="size-4 text-gold" aria-hidden="true" />
+                  ปรึกษากฎหมาย
+                </Link>
+                <span className="text-muted-foreground/30">|</span>
+                <Link
+                  href="/th/contact"
+                  className="inline-flex items-center gap-1.5 text-primary hover:text-gold transition-colors"
+                >
+                  <ArrowRight className="size-4 text-gold" aria-hidden="true" />
+                  ติดต่อสำนักงาน
+                </Link>
+              </div>
+            </div>
+            
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <h3 className="font-serif text-xl font-bold text-primary">ขอบเขตการดำเนินงานในพื้นที่เดชอุดม อุบลราชธานี</h3>
+              <ul className="mt-6 space-y-4">
+                <li className="flex gap-3 text-sm leading-7 text-muted-foreground">
+                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-gold" aria-hidden="true" />
+                  <span><strong>ปรึกษากฎหมายเบื้องต้น:</strong> ตรวจสอบประเด็นและข้อกฎหมายก่อนเริ่มดำเนินคดี</span>
+                </li>
+                <li className="flex gap-3 text-sm leading-7 text-muted-foreground">
+                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-gold" aria-hidden="true" />
+                  <span><strong>ตรวจเอกสารและข้อเท็จจริง:</strong> ประเมินพยานหลักฐานและเอกสารของลูกความอย่างรัดกุม</span>
+                </li>
+                <li className="flex gap-3 text-sm leading-7 text-muted-foreground">
+                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-gold" aria-hidden="true" />
+                  <span><strong>วางแนวทางดำเนินคดี:</strong> กำหนดขั้นตอนและแผนการต่อสู้คดีหรือดำเนินงานด้านเอกสาร</span>
+                </li>
+                <li className="flex gap-3 text-sm leading-7 text-muted-foreground">
+                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-gold" aria-hidden="true" />
+                  <span><strong>คดีแพ่ง คดีอาญา คดีครอบครัว มรดก ที่ดิน:</strong> รับว่าความคดีความครอบคลุมและอรรถคดีทั่วไป</span>
+                </li>
+                <li className="flex gap-3 text-sm leading-7 text-muted-foreground">
+                  <CheckCircle2 className="mt-1 size-5 shrink-0 text-gold" aria-hidden="true" />
+                  <span><strong>รับว่าความทั่วราชอาณาจักร:</strong> อำนวยความสะดวกในพื้นที่ใกล้เคียงและทั่วประเทศตามลักษณะคดี</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       <section className="py-16 md:py-20">
         <Container>
           <SectionHeading

@@ -12,14 +12,15 @@ import {
 } from 'lucide-react'
 
 import { Container } from '@/components/container'
+import { PageHero } from '@/components/page-hero'
 import { CTASection } from '@/components/cta-section'
 
 const baseUrl = 'https://www.thiangthamlaw.com'
 
-const title = 'ทนายความเดชอุดม จังหวัดอุบลราชธานี | สำนักกฎหมายเที่ยงธรรมทนายความ'
+const title = 'ทนายความเดชอุดม | สำนักกฎหมายเที่ยงธรรมทนายความ'
 
 const description =
-  'สำนักกฎหมายเที่ยงธรรมทนายความ ให้คำปรึกษากฎหมายและรับว่าความในพื้นที่อำเภอเดชอุดม จังหวัดอุบลราชธานี ดูแลคดีแพ่ง คดีอาญา คดีครอบครัว คดีมรดก คดีที่ดิน และงานเอกสารทางกฎหมาย'
+  'สำนักกฎหมายเที่ยงธรรมทนายความ ให้บริการปรึกษากฎหมายและรับว่าความในพื้นที่อำเภอเดชอุดม จังหวัดอุบลราชธานี และใกล้เคียง พร้อมรับว่าความอรรถคดีทั่วราชอาณาจักร'
 
 export const metadata: Metadata = {
   title,
@@ -137,27 +138,22 @@ export default function LawyerDetUdomPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="bg-primary py-16 text-primary-foreground md:py-24">
+      <PageHero
+        title="ทนายความเดชอุดม"
+        description="สำนักกฎหมายเที่ยงธรรมทนายความ ตั้งอยู่ในอำเภอเดชอุดม จังหวัดอุบลราชธานี ให้บริการปรึกษากฎหมาย ตรวจข้อเท็จจริง และประเมินแนวทางคดี รวมถึงรับว่าความทั่วราชอาณาจักร"
+        crumbs={[{ href: '/th', label: 'หน้าแรก' }, { label: 'ทนายความเดชอุดม' }]}
+      />
+
+      <section className="py-12 md:py-16 bg-secondary/10 border-b border-border">
         <Container>
           <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-gold">
-              Legal Service in Det Udom
+            <p className="text-base leading-8 text-muted-foreground md:text-lg">
+              สำนักกฎหมายเที่ยงธรรมทนายความ ให้บริการปรึกษากฎหมายและรับว่าความในพื้นที่อำเภอเดชอุดม จังหวัดอุบลราชธานี โดยทีมงานจะร่วมวิเคราะห์ข้อเท็จจริงและตรวจพยานหลักฐานอย่างละเอียด พร้อมรักษาความลับของลูกความตามมาตรฐานจรรยาบรรณวิชาชีพทนายความ และยังคงรับว่าความอรรถคดีทั่วราชอาณาจักรตามความพร้อมและลักษณะของเรื่อง
             </p>
-
-            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight md:text-5xl">
-              ทนายความเดชอุดม จังหวัดอุบลราชธานี
-            </h1>
-
-            <p className="mt-6 text-base leading-8 text-primary-foreground/85 md:text-lg">
-              สำนักกฎหมายเที่ยงธรรมทนายความให้คำปรึกษากฎหมายและรับว่าความในพื้นที่อำเภอเดชอุดม
-              จังหวัดอุบลราชธานี สำหรับผู้ที่ต้องการประเมินแนวทางคดี เตรียมเอกสาร
-              หรือปรึกษาทนายความก่อนดำเนินการตามขั้นตอนกฎหมาย
-            </p>
-
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/th/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-bold text-primary transition hover:bg-white"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-gold px-6 py-2.5 text-sm font-bold text-primary transition hover:bg-gold-soft"
               >
                 ติดต่อสำนักงาน
                 <ArrowRight className="size-4" aria-hidden="true" />
@@ -165,7 +161,7 @@ export default function LawyerDetUdomPage() {
 
               <Link
                 href="/th/consultation"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-bold text-white transition hover:border-gold hover:text-gold"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-card px-6 py-2.5 text-sm font-bold text-primary transition hover:border-gold hover:text-gold"
               >
                 นัดปรึกษากฎหมาย
                 <MessageCircle className="size-4" aria-hidden="true" />
