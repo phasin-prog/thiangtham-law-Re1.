@@ -1,4 +1,4 @@
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from '@vercel/analytics/next'
 import { AnalyticsTracker } from '@/components/analytics-tracker'
 import './globals.css'
 
@@ -26,7 +26,7 @@ export default function RootLayout({
         </a>
         {children}
         <AnalyticsTracker />
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <Analytics />
       </body>
     </html>
   )
