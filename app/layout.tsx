@@ -1,6 +1,13 @@
+import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/react'
 import { AnalyticsTracker } from '@/components/analytics-tracker'
 import './globals.css'
+
+export const metadata: Metadata = {
+  title: 'สำนักกฎหมายเที่ยงธรรมทนายความ',
+  description: 'ปรึกษากฎหมายและรับว่าความ',
+}
 
 export default function RootLayout({
   children,
@@ -27,7 +34,27 @@ export default function RootLayout({
         {children}
         <AnalyticsTracker />
         {process.env.NODE_ENV === 'production' && <Analytics />}
+
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-7LXBDR1Z2V"
+          strategy="afterInteractive"
+        />
+
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-7LXBDR1Z2V');
+            `,
+          }}
+        />
       </body>
     </html>
   )
 }
+
