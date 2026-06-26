@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="img" aria-labelledby="title desc">
+  <title id="title">ภาพแทนทีมงาน</title>
+  <desc id="desc">ภาพเงาทีมงานบนพื้นหลังสีน้ำเงินและทอง</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#182a45"/>
+      <stop offset="1" stop-color="#3b5270"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e4ca75"/>
+      <stop offset="1" stop-color="#b98b2e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="700" fill="url(#background)"/>
+  <circle cx="870" cy="110" r="240" fill="#ffffff" opacity=".035"/>
+  <path d="M0 570 1000 380v320H0Z" fill="#101f34" opacity=".72"/>
+  <g fill="#f4ead0">
+    <circle cx="310" cy="270" r="88"/>
+    <circle cx="500" cy="220" r="106"/>
+    <circle cx="700" cy="270" r="88"/>
+    <path d="M165 610c16-152 68-245 145-245s129 93 145 245Z"/>
+    <path d="M320 620c22-190 84-302 180-302s158 112 180 302Z"/>
+    <path d="M555 610c16-152 68-245 145-245s129 93 145 245Z"/>
+  </g>
+  <g fill="#253b59">
+    <path d="M232 382 310 458l78-76 34 65-35 163H233l-35-163Z"/>
+    <path d="m402 342 98 104 98-104 46 82-48 196H404l-48-196Z"/>
+    <path d="m622 382 78 76 78-76 34 65-35 163H623l-35-163Z"/>
+  </g>
+  <rect x="75" y="65" width="190" height="9" rx="4.5" fill="url(#accent)"/>
+  <rect x="75" y="90" width="120" height="6" rx="3" fill="#f4ead0" opacity=".55"/>
+</svg>

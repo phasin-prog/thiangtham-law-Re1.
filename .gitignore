@@ -1,0 +1,41 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# Environment and deployment state
+.env*
+!.env.example
+.vercel/
+
+# Local editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Local browser and visual-test artifacts
+.chrome-*/
+.codex-*/
+.codex-*.js
+.codex-install-stage/
+team-*.png
+temp_*.html
+
+# Local agent tooling
+.agents/
+.gemini/
+.impeccable/
+
+# v0 sandbox internal files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+
+# Copilot Superpowers — installed skills (local only, not tracked by git)
+.agent/skills/
+.agent/skills-catalog.md
