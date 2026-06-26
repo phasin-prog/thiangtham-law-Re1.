@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: service.title, 
         description: service.description,
         alternates: {
-          canonical: `https://thiangtham-law.com/th/services/${slug}`,
+          canonical: `https://www.thiangthamlaw.com/th/services/${slug}`,
         }
       }
     : { title: 'ไม่พบบริการ' }

@@ -40,10 +40,10 @@ export const metadata: Metadata = {
   description:
     'An anonymized overview of how Thiangtham Law Office receives matters, reviews evidence, sets strategy, and tracks legal work without disclosing client information.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/case-studies',
+    canonical: 'https://www.thiangthamlaw.com/en/case-studies',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/case-studies',
-      'en-US': 'https://thiangtham-law.com/en/case-studies',
+      'th-TH': 'https://www.thiangthamlaw.com/th/case-studies',
+      'en-US': 'https://www.thiangthamlaw.com/en/case-studies',
     },
   },
 }

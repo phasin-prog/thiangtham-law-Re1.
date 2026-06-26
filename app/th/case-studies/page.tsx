@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   description:
     'บริการว่าความและดำเนินคดีทุกประเภท ตั้งแต่คดีแพ่ง อาญา ครอบครัว มรดก ที่ดิน ไปจนถึงชั้นอุทธรณ์และฎีกา โดยทีมทนายความมืออาชีพ',
   alternates: {
-    canonical: 'https://thiangtham-law.com/th/case-studies',
+    canonical: 'https://www.thiangthamlaw.com/th/case-studies',
   },
 }
 

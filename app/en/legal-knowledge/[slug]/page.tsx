@@ -33,10 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: category.title,
         description: category.description,
         alternates: {
-          canonical: `https://thiangtham-law.com/en/legal-knowledge/${slug}`,
+          canonical: `https://www.thiangthamlaw.com/en/legal-knowledge/${slug}`,
           languages: {
-            'th-TH': `https://thiangtham-law.com/th/legal-knowledge/${slug}`,
-            'en-US': `https://thiangtham-law.com/en/legal-knowledge/${slug}`,
+            'th-TH': `https://www.thiangthamlaw.com/th/legal-knowledge/${slug}`,
+            'en-US': `https://www.thiangthamlaw.com/en/legal-knowledge/${slug}`,
           },
         },
       }

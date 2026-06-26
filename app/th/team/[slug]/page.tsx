@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : {
         title: 'ไม่พบประวัติบุคลากร',
         alternates: {
-          canonical: 'https://thiangtham-law.com/th/team',
+          canonical: 'https://www.thiangthamlaw.com/th/team',
         },
       }
 }

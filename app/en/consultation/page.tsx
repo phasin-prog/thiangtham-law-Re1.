@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: 'Initial Consultation',
   description: 'Send the initial facts and request a follow-up from the legal team at Thiangtham Law Office.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/consultation',
+    canonical: 'https://www.thiangthamlaw.com/en/consultation',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/consultation',
-      'en-US': 'https://thiangtham-law.com/en/consultation',
+      'th-TH': 'https://www.thiangthamlaw.com/th/consultation',
+      'en-US': 'https://www.thiangthamlaw.com/en/consultation',
     },
   },
 }

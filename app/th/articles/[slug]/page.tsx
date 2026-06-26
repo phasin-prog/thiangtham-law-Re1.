@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: article.title, 
         description: article.excerpt,
         alternates: {
-          canonical: `https://thiangtham-law.com/th/articles/${slug}`,
+          canonical: `https://www.thiangthamlaw.com/th/articles/${slug}`,
         }
       } 
     : { title: 'ไม่พบบทความ' }

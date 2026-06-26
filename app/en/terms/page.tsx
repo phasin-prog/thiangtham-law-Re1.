@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description:
     'Terms and conditions for using the Thiangtham Law Office website and legal information.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/terms',
+    canonical: 'https://www.thiangthamlaw.com/en/terms',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/terms',
-      'en-US': 'https://thiangtham-law.com/en/terms',
+      'th-TH': 'https://www.thiangthamlaw.com/th/terms',
+      'en-US': 'https://www.thiangthamlaw.com/en/terms',
     },
   },
 }

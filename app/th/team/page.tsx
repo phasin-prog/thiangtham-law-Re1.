@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   description:
     'ทีมทนายความ ที่ปรึกษา และฝ่ายประสานงานคดีของสำนักกฎหมายเที่ยงธรรมทนายความ ทำงานร่วมกันในการตรวจข้อเท็จจริง วิเคราะห์เอกสาร วางแนวทางคดี และดูแลการประสานงานกับลูกความอย่างเป็นระบบ ภายใต้การดูแลของทนายความผู้ได้รับใบอนุญาต',
   alternates: {
-    canonical: 'https://thiangtham-law.com/th/team',
+    canonical: 'https://www.thiangthamlaw.com/th/team',
     languages: {
-      th: 'https://thiangtham-law.com/th/team',
-      en: 'https://thiangtham-law.com/en/team',
+      th: 'https://www.thiangthamlaw.com/th/team',
+      en: 'https://www.thiangthamlaw.com/en/team',
     },
   },
 }

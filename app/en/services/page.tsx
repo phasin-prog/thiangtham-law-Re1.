@@ -37,10 +37,10 @@ export const metadata: Metadata = {
   description:
     'Case work, legal advice, document review, tax support, and foreign document services in Thailand.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/services',
+    canonical: 'https://www.thiangthamlaw.com/en/services',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/services',
-      'en-US': 'https://thiangtham-law.com/en/services',
+      'th-TH': 'https://www.thiangthamlaw.com/th/services',
+      'en-US': 'https://www.thiangthamlaw.com/en/services',
     },
   },
 }

@@ -7,10 +7,10 @@ export const metadata: Metadata = {
   description:
     'How Thiangtham Law Office collects, uses, and protects personal information from clients and website visitors.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/privacy',
+    canonical: 'https://www.thiangthamlaw.com/en/privacy',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/privacy',
-      'en-US': 'https://thiangtham-law.com/en/privacy',
+      'th-TH': 'https://www.thiangthamlaw.com/th/privacy',
+      'en-US': 'https://www.thiangthamlaw.com/en/privacy',
     },
   },
 }

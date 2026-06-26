@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   title: 'Legal Knowledge',
   description: 'General legal information and practical guides for preparing documents and understanding legal procedures.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/legal-knowledge',
+    canonical: 'https://www.thiangthamlaw.com/en/legal-knowledge',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/legal-knowledge',
-      'en-US': 'https://thiangtham-law.com/en/legal-knowledge',
+      'th-TH': 'https://www.thiangthamlaw.com/th/legal-knowledge',
+      'en-US': 'https://www.thiangthamlaw.com/en/legal-knowledge',
     },
   },
 }

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   description:
     'Meet the lawyers, advisors, and case coordination team of Thiangtham Law Office working together under licensed attorneys with a structured client-care process.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/team',
+    canonical: 'https://www.thiangthamlaw.com/en/team',
     languages: {
-      th: 'https://thiangtham-law.com/th/team',
-      en: 'https://thiangtham-law.com/en/team',
+      th: 'https://www.thiangthamlaw.com/th/team',
+      en: 'https://www.thiangthamlaw.com/en/team',
     },
   },
 }

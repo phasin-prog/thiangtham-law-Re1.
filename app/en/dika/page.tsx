@@ -8,10 +8,10 @@ export const metadata: Metadata = {
   title: 'Supreme Court Cases',
   description: 'How Thai Supreme Court decisions may be reviewed and used as part of legal analysis.',
   alternates: {
-    canonical: 'https://thiangtham-law.com/en/dika',
+    canonical: 'https://www.thiangthamlaw.com/en/dika',
     languages: {
-      'th-TH': 'https://thiangtham-law.com/th/dika',
-      'en-US': 'https://thiangtham-law.com/en/dika',
+      'th-TH': 'https://www.thiangthamlaw.com/th/dika',
+      'en-US': 'https://www.thiangthamlaw.com/en/dika',
     },
   },
 }

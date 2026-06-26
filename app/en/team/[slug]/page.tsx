@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : {
         title: 'Profile Not Found',
         alternates: {
-          canonical: 'https://thiangtham-law.com/en/team',
+          canonical: 'https://www.thiangthamlaw.com/en/team',
         },
       }
 }
